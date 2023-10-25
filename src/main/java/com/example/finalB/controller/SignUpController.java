@@ -19,6 +19,8 @@ public class SignUpController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody Member member) {
 		
+		System.out.println(member.toString());
+		
 		Member findMemberId = signupservice.getMember(member.getId());
 
 		if (findMemberId.getId() == null) {
