@@ -11,6 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +34,7 @@ public class Member {
 	@Column(length = 100)
 	private String pw; // 비번
 
-	@Column(nullable = false, length = 100, unique = true) // null 값 가질 수 없음, 크기=20, 중복 됨
+	@Column(nullable = false, length = 100) // null 값 가질 수 없음, 크기=20
 	private String username; // 이름
 
 	@Column(length = 100, nullable = false)
@@ -48,10 +49,10 @@ public class Member {
 	@Column(length = 100, nullable = false)
 	private String detailAddress; // 상세주소
 
-	@Column(length = 6, nullable = false)
+	@Column(length = 8, nullable = false)
 	private Integer birthdate; // 생년월일
 
-	// 권한 => USER, ADMIN
+	// 권한 => MEMBER, ADMIN
 	@Enumerated(EnumType.STRING)
 	private RoleType role;
 
@@ -60,6 +61,7 @@ public class Member {
 	private OAuthType oauth;
 
 	// 레코드가 생성되는 시점에 자동으로 날짜가 넣어짐 ( = SYSDATE)
+	@Column(updatable = false)
 	@CreationTimestamp
 	private Timestamp createDate;
 
