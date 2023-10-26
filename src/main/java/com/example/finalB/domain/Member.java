@@ -51,10 +51,8 @@ public class Member {
 	@Column(length = 6, nullable = false)
 	private Integer birthdate; // 생년월일
 	
-	@Builder.Default
 	private Integer mileage = 0; // 마일리지 (초기값 0)
 	
-	@Builder.Default
 	private Integer transactionPoints = 0; // 거래점수 (초기값 0)
 
 	// 권한 => USER, ADMIN
