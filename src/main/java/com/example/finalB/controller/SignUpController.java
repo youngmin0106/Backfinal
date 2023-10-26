@@ -43,9 +43,7 @@ public class SignUpController {
 			System.out.println("중복 아이디");
 			return new ResponseEntity<>("사용불가 아이디", HttpStatus.BAD_REQUEST);
 		}
-		
 	}
-	
 }
 
 
