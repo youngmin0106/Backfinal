@@ -1,5 +1,7 @@
 package com.example.finalB.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,15 +9,18 @@ import com.example.finalB.domain.Member;
 import com.example.finalB.repository.MemberRepository;
 
 @Service
-public class UnregisterService {
+public class MileageService {
 
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public void unregisterMember(String id) {
+	@Transactional
+	public void chargeMileage(Member member) {
+	
+		Member newMember = memberRepository.findById(member.getId()).get();
+	
+		newMember.setMileage(member.getMileage());
 		
-		System.out.println(id);
-		
-		memberRepository.deleteById(id);
 	}
+	
 }

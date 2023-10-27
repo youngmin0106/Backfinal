@@ -24,6 +24,7 @@ public class UnregisterController {
 	public void unregister(@RequestBody(required = false) Member member) {
 		
 		System.out.println(member.getId());
+		unregisterService.unregisterMember(member.getId());
 		
 //		String id = member.getId();
 //		System.out.println(id);
