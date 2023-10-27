@@ -16,7 +16,7 @@ public class LoginService {
 		
 		Member member = memberrepository.findById(id).orElse(null);
 
-		if (member != null && member.getPw().equals(password)) {
+		if (member.getPw().equals(password)) {
 			return member;
 		}
 		return null;
