@@ -31,11 +31,13 @@ public class TransController {
 	
 	// 계정 판매 목록 
 	@GetMapping("/transPost")
-	public void transPostList() {
+	public ResponseEntity<?> transPostList() {
 		
 		List<Trans> transList = transService.getTransList();
 		
-		System.out.println(transList);	// 잘나옴 member만 빼고
+		//System.out.println(transList);	// 잘나옴 member만 빼고
+		
+		return new ResponseEntity<>(transList, HttpStatus.OK);
 		
 		
 	}

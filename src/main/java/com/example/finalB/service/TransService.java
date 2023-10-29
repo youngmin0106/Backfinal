@@ -21,7 +21,7 @@ public class TransService {
 	
 	public List<Trans> getTransList() {
 		
-		return transRepository.findAll();
+		return transRepository.findAllByOrderByIdDesc();
 		
 	}
 
