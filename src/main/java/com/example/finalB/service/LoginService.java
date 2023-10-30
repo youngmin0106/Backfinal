@@ -12,11 +12,11 @@ public class LoginService {
 	@Autowired
 	MemberRepository memberrepository;
 	
-	public Member loginIdPwChk(String id, String password) {
+	public Member loginIdPwChk(String username, String password) {
 		
-		Member member = memberrepository.findById(id).orElse(null);
+		Member member = memberrepository.findByUsername(username).orElse(null);
 
-		if (member.getPw().equals(password)) {
+		if (member.getPassword().equals(password)) {
 			return member;
 		}
 		return null;

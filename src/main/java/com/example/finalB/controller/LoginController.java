@@ -20,12 +20,12 @@ public class LoginController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Member member) {
 		
-		String id = member.getId();
-		String password = member.getPw();
+		String username = member.getUsername();
+		String password = member.getPassword();
 		
-		Member loginIdPw = loginservice.loginIdPwChk(id, password);
+		Member loginIdPw = loginservice.loginIdPwChk(username, password);
 		
-		System.out.println(id);
+		System.out.println(username);
 		System.out.println(password);
 		
 		if (loginIdPw != null) {

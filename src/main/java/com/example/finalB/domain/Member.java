@@ -29,13 +29,13 @@ public class Member {
 	// 멤버변수 -> 칼럼명
 
 	@Id // 기본키 컬럼
-	private String id; // 아이디
+	private String username; // 아이디
 
 	@Column(length = 100)
-	private String pw; // 비번
+	private String password; // 비번
 
 	@Column(nullable = false, length = 100) // null 값 가질 수 없음, 크기=20
-	private String username; // 이름
+	private String name; // 이름
 
 	@Column(length = 100, nullable = false)
 	private String email; // 이메일
