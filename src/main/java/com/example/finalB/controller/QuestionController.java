@@ -57,7 +57,7 @@ public class QuestionController {
 		return new ResponseEntity<>(no + "번 게시물 삭제 완료",HttpStatus.OK);
 	}
 	
-	@PutMapping("/questions/{qno}/update")
+	@PutMapping("/questions/{no}/update")
 	public ResponseEntity<?> updateNotice(@RequestBody Questions questions){
 		
 		questionService.updateQuestion(questions);
@@ -67,7 +67,7 @@ public class QuestionController {
 	
 	
 	
-	@PutMapping("/questions/{qno}/views")
+	@PutMapping("/questions/{no}/views")
     public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
         Optional<Questions> questionOptional = questionRepository.findById(no);
         if (questionOptional.isPresent()) {

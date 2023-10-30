@@ -1,6 +1,5 @@
 package com.example.finalB.domain;
 
-
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -23,20 +22,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Questions")
+@Table(name = "Onetoone")
 @SequenceGenerator(
-		name = "QUESTIONS_SEQ_GENERATOR", 
-		sequenceName = "QUESTIONS_SEQ", 
+		name = "ONETOONE_SEQ_GENERATOR", 
+		sequenceName = "Onetoone_SEQ", 
 		initialValue = 1, allocationSize = 1)
-@AllArgsConstructor //자주묻는 질문
-public class Questions {
-
+@AllArgsConstructor
+public class OneToOne {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "QUESTIONS_SEQ_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "ONETOONE_SEQ_GENERATOR")
 	private Integer no; // 게시글 번호
 
 	@Column(nullable = false, length = 100)

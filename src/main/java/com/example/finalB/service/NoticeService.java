@@ -18,6 +18,7 @@ public class NoticeService {
 	public void insertNotice(Cs cs) {
 		
 		csRepository.save(cs);
+	
 	}
 	//게시물 리스트
 	public List<Cs> getNoticeList() {
