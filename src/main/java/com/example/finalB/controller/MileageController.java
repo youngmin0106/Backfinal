@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.finalB.domain.Member;
 import com.example.finalB.repository.MemberRepository;
+import com.example.finalB.service.InTransactionService;
 import com.example.finalB.service.MileageService;
 
 @RestController
 public class MileageController {
 
 	@Autowired
-	private MemberRepository memberRepository;
+	private InTransactionService inTransactionService;
 	
 	@Autowired
 	private MileageService mileageService;
@@ -30,5 +31,24 @@ public class MileageController {
 		return new ResponseEntity<>("마일리지 충전 완료", HttpStatus.OK);
 	}
 	
+	@PostMapping("/testSellTrans") 
+	public ResponseEntity<?> turnOverTest(@RequestBody int id) {
+		
+		System.out.println(id);
+		
+		inTransactionService.changeSellerChk(id);
+		
+		return new ResponseEntity<>("인계 완료", HttpStatus.OK);
+	}
+	
+	@PostMapping("/testBuyTrans")
+	public ResponseEntity<?> takeOverTest(@RequestBody int id) {
+		
+		inTransactionService.changeBuyerChk(id);
+		
+		
+		
+		return new ResponseEntity<>("인수 완료", HttpStatus.OK);
+	}
 
 }
