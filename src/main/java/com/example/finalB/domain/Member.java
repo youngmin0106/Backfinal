@@ -61,5 +61,6 @@ public class Member {
 	// 레코드가 생성되는 시점에 자동으로 날짜가 넣어짐 ( = SYSDATE)
 	@CreationTimestamp
 	private Timestamp createDate;
-
+	
+	
 }

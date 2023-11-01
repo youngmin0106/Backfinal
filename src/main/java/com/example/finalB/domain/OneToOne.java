@@ -1,7 +1,9 @@
 package com.example.finalB.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -52,4 +57,9 @@ public class OneToOne {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
 	private Member member;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OrderBy("no desc")
+	private List<Reply> replyList;
 }
