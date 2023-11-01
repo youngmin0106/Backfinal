@@ -34,23 +34,23 @@ public class Member {
 	@Column(length = 100)
 	private String password; // 비번
 
-	@Column(nullable = false, length = 100) // null 값 가질 수 없음, 크기=20
+	@Column(length = 100) // null 값 가질 수 없음, 크기=20
 	private String name; // 이름
 
 	@Column(length = 100, nullable = false)
 	private String email; // 이메일
 
-	@Column(length = 13, nullable = false)
+	@Column(length = 13)
 	private String phone; // 전화번호
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	private String address; // 주소
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	private String detailAddress; // 상세주소
 
-	@Column(length = 8, nullable = false)
-	private Integer birthdate; // 생년월일
+	@Column(length = 8)
+	private String birthdate; // 생년월일
 
 	// 권한 => MEMBER, ADMIN
 	@Enumerated(EnumType.STRING)
@@ -64,5 +64,6 @@ public class Member {
 	@Column(updatable = false)
 	@CreationTimestamp
 	private Timestamp createDate;
+
 
 }

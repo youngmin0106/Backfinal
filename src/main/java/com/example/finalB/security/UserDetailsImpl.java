@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDetailsImpl implements UserDetails, OAuth2User {
+public class UserDetailsImpl implements UserDetails {
 
 	/**
 	 * 
@@ -90,19 +90,6 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
 		return true;
 	}
 
-
-	@Override
-	public Map<String, Object> getAttributes() {
-		// TODO Auto-generated method stub
-		return attributes;
-	}
-
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

@@ -24,6 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				return new UsernameNotFoundException(username + "은 존재하지 않습니다.");
 			});
 		
+		System.out.println(member);
+		
 		return new UserDetailsImpl(member);
 	}
 
