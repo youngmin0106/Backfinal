@@ -1,6 +1,7 @@
 package com.example.finalB.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,18 @@ public class TransService {
 	private TransRepository transRepository;
 	
 	public void insertTrans(Trans trans) {
+		
 		transRepository.save(trans);
 	}
 	
 	public List<Trans> getTransList() {
 		
 		return transRepository.findAllByOrderByIdDesc();
-		
+	}
+	
+	public Trans getTrans(Integer id) {
+		 
+		return transRepository.findById(id).get();
 	}
 
 
