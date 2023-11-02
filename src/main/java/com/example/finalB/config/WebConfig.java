@@ -2,6 +2,7 @@ package com.example.finalB.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -18,3 +19,5 @@ public class WebConfig implements WebMvcConfigurer  {
 		// 배포(FireBase)를 하면 달라지기 때문에 도메인으로 바꿔줘야함
 	}
 }
+
+
