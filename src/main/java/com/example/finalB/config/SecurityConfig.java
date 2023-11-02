@@ -38,7 +38,8 @@ public class SecurityConfig {
 		// 세션 비활성화
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", "/idoverlap").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", 
+				"/idoverlap", "/oauth/google").permitAll()
 				.antMatchers(HttpMethod.GET, "/board").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
