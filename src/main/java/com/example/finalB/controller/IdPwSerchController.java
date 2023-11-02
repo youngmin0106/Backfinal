@@ -12,20 +12,36 @@ import com.example.finalB.service.MemberService;
 
 @RestController
 public class IdPwSerchController {
-	
+
 	@Autowired
 	MemberService memberService;
 
-    @PostMapping("/idpwserch")
-    public ResponseEntity<?> getIdPw(@RequestBody Member member) {
-    	
-        String phone = member.getPhone();
-        System.out.println(phone);
-        
-        Member findIdPw = memberService.getIdPassword(phone);
-     
-        return new ResponseEntity<>(findIdPw, HttpStatus.OK);
-    }
+	@PostMapping("/idserch")
+	public ResponseEntity<?> getIdPw(@RequestBody Member member) {
+
+		String phone = member.getPhone();
+
+		Member findIdPw = memberService.getIdPassword(phone);
+
+		return new ResponseEntity<>(findIdPw, HttpStatus.OK);
+	}
+
+	@PostMapping("/pwchange")
+	public ResponseEntity<?> changePassword(@RequestBody Member member) {
+
+		String phone = member.getPhone();
+		String newPassword = member.getPassword();
+
+		System.out.println(phone);
+		System.out.println(newPassword);
+
+		Member findMember = memberService.getIdPassword(phone);
+
+		findMember.setPassword(newPassword);
+		memberService.updateMember(findMember);
+
+		return new ResponseEntity<>("변경된 비밀번호로 로그인하세요", HttpStatus.OK);
+
+	}
 }
-	
 

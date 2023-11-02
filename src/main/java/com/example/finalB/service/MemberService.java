@@ -52,6 +52,22 @@ public class MemberService {
 		memberRepository.save(member);
 
 	}
+	
+	public Member getMember(String username) {
+		return memberRepository.findByUsername(username).orElseGet(() -> {
+			return new Member();
+		});
+	}
+	
+	public Member getIdPassword(String phone) {
+		return memberRepository.findByPhone(phone).orElseGet(() -> {
+			return new Member();
+		});
+	}
+
+    public void updateMember(Member member) {
+        memberRepository.save(member);
+    }
 
 	public Member googleLogin(String token) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -83,17 +99,6 @@ public class MemberService {
 		return member;
 	}
 
-	public Member getMember(String username) {
-		return memberRepository.findByUsername(username).orElseGet(() -> {
-			return new Member();
-		});
-	}
-	
-	public Member getIdPassword(String phone) {
-		return memberRepository.findByPhone(phone).orElseGet(() -> {
-			return new Member();
-		});
-	}
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
 
