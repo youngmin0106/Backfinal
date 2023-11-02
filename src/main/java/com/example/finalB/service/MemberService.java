@@ -2,7 +2,6 @@ package com.example.finalB.service;
 
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -89,16 +88,28 @@ public class MemberService {
 			return new Member();
 		});
 	}
+	
+	public Member getIdPassword(String phone) {
+		return memberRepository.findByPhone(phone).orElseGet(() -> {
+			return new Member();
+		});
+	}
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
-		
+
 		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
 		String jwt = jwtService.getToken(auth.getName());
-		
+
+		Member member = memberRepository.findById(username).get();
+
+		MultiValueMap<String, Member> body = new LinkedMultiValueMap<>();
+
+		body.add("member", member);
+
 		return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
-				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").build();
+				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").body(body);
 	}
 
 	public String getKakaoAccessToken(String code) {
@@ -169,6 +180,3 @@ public class MemberService {
 	}
 
 }
-
-
-
