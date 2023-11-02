@@ -92,7 +92,7 @@ public class MemberService {
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
 		
-		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kago123");
+		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
 		String jwt = jwtService.getToken(auth.getName());
