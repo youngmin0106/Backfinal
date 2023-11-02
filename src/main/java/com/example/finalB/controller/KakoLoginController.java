@@ -53,7 +53,7 @@ public class KakoLoginController {
 	      if(findMember.getUsername() == null)
 	         memberService.insertMember(userInfo);
 	      
-	      return memberService.getResponseEntity(userInfo.getUsername(), userInfo.getPassword());
+	      return memberService.getResponseEntity(userInfo.getUsername(), "kagoo123");
 	   }
 
 	

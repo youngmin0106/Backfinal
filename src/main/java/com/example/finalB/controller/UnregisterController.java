@@ -23,8 +23,8 @@ public class UnregisterController {
 	@PostMapping("/unregister")
 	public void unregister(@RequestBody(required = false) Member member) {
 		
-		System.out.println(member.getId());
-		unregisterService.unregisterMember(member.getId());
+		System.out.println(member.getUsername());
+		unregisterService.unregisterMember(member.getUsername());
 		
 //		String id = member.getId();
 //		System.out.println(id);

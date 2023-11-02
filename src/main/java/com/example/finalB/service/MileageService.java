@@ -17,7 +17,7 @@ public class MileageService {
 	@Transactional
 	public void chargeMileage(Member member) {
 	
-		Member newMember = memberRepository.findById(member.getId()).get();
+		Member newMember = memberRepository.findById(member.getUsername()).get();
 	
 		newMember.setMileage(member.getMileage());
 		
