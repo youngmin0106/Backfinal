@@ -4,6 +4,7 @@ package com.example.finalB.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +30,16 @@ public class LoginController {
 		System.out.println(password);
 		
 		if (loginIdPw != null) {
-			return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
+			return new ResponseEntity<>(loginIdPw, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+//	@GetMapping("/userInfo")
+//	public String userInfo() {
+//		return loginservice.userInfo();
+//	}
 
 }
 

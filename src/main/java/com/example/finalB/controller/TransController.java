@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,9 +53,18 @@ public class TransController {
 		return new ResponseEntity<>(trans, HttpStatus.OK);
 	}
 	
-//	@PutMapping("updateTrans/{id}")
-//	public ResponseEntity<?> updateTrans(@PathVariable Integer id, Trans trnas) {
-//		
-//		
-//	}
+	@PutMapping("/updateTrans")
+	public ResponseEntity<?> updateTrans(@RequestBody Trans trans) {
+		System.out.println(trans);
+		transService.updateTrans(trans);
+		
+		return new ResponseEntity<String>("수정 완료되었습니다.", HttpStatus.OK);
+		
+	}
+	
+	@DeleteMapping("/deleteTrans/{id}")
+	public ResponseEntity<?> deleteTrans(@PathVariable Integer id) {
+		transService.deleteTrans(id);
+		return new ResponseEntity<String>("삭제가 완료되었습니다", HttpStatus.OK);
+	}
 }

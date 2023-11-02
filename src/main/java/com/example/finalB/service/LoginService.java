@@ -21,7 +21,11 @@ public class LoginService {
 		}
 		return null;
 	}
-		
+	
+//	public String userInfo() {
+//		String username = memberrepository.findByUsername().get();
+//	}
+//		
 }
 
 

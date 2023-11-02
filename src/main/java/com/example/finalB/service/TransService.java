@@ -3,6 +3,8 @@ package com.example.finalB.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +35,19 @@ public class TransService {
 		return transRepository.findById(id).get();
 	}
 	
-//	// 해당 게시물 수정
-//	public 
-//	// 해당 게시물 삭제
-
+	// 해당 게시물 수정
+	public void updateTrans(Trans trans) {
+		Trans originalTrans = transRepository.findById(trans.getId()).get();
+		
+		originalTrans.setTitle(trans.getTitle());
+		originalTrans.setContent(trans.getContent());
+		originalTrans.setPrice(trans.getPrice());
+		
+		transRepository.save(originalTrans);
+	}
+	// 해당 게시물 삭제
+	public void deleteTrans(Integer id) {
+		transRepository.deleteById(id);
+	}
 
 }
