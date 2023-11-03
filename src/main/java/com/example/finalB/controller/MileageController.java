@@ -23,8 +23,6 @@ public class MileageController {
 	
 	@PostMapping("/payCultureland")
 	public ResponseEntity<?> payCultureland(@RequestBody Member member) {
-	
-		System.out.println(member);
 		
 		mileageService.chargeMileage(member);
 		
