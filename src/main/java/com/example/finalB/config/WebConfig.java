@@ -13,7 +13,8 @@ public class WebConfig implements WebMvcConfigurer  {
 		
 		registry.addMapping("/**")	// 모든 요청을 받았을때
 				.allowedOrigins("http://localhost:3000")	// 3000 포트번호로 들어오는거 허용하셈
-				.allowedMethods("GET", "POST", "DELETE", "UPDATE");
+				.allowedMethods("GET", "POST", "DELETE", "PUT");
+
 
 		
 		// 시큐리티 쓰면 시큐리티도 설정해야함
