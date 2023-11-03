@@ -31,8 +31,8 @@ public class NoticeController {
 	
 	@PostMapping("/notice") //게시물추가
 	public ResponseEntity<?> insertNotice(@RequestBody Cs cs){
-		
 		noticeService.insertNotice(cs);
+//		System.out.println(cs);
 			
 		return new ResponseEntity<>("공지사항 작성 완료" , HttpStatus.OK);
 	}
@@ -40,7 +40,7 @@ public class NoticeController {
 	@GetMapping("/notice") //게시물리스트
 	public ResponseEntity<?> getNoticeList(){
 		List<Cs> noticeList = noticeService.getNoticeList();
-		
+		System.out.println(noticeList);
 		return new ResponseEntity<>(noticeList,HttpStatus.OK);
 	}
 	@GetMapping("/notice/{no}") //하나게시물만 보기

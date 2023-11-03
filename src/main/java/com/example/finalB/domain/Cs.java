@@ -50,10 +50,11 @@ public class Cs {
 	
 	private int cnt; // 조회수
 
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
 	private Member member;
-//
+
 //	@OneToMany(mappedBy = "cs", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 //	@OrderBy("no desc")
 //	private List<Reply> replyList;
