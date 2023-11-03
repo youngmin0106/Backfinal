@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -45,6 +47,7 @@ public class Trans {
 	private String game; // 게임명
 	
 	@CreationTimestamp
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp createdate; // 게시글 등록 일자
 	
 	@ManyToOne
