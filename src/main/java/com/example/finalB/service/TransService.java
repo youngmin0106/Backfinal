@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.finalB.domain.Member;
 import com.example.finalB.domain.Trans;
 import com.example.finalB.repository.TransRepository;
 
@@ -19,7 +20,7 @@ public class TransService {
 	
 	// 게시물 등록
 	public void insertTrans(Trans trans) {
-		
+
 		transRepository.save(trans);
 	}
 	

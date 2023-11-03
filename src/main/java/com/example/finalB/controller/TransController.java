@@ -3,6 +3,7 @@ package com.example.finalB.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.finalB.domain.Member;
 import com.example.finalB.domain.Trans;
 import com.example.finalB.service.TransService;
 
@@ -25,10 +28,9 @@ public class TransController {
 	
 	@PostMapping("/insertTrans")
 	public @ResponseBody ResponseEntity<?> insertTrans(@RequestBody Trans trans) {
-		
+
 		transService.insertTrans(trans);
 		
-		System.out.println(trans);
 		return new ResponseEntity<String>("계정 등록 완료되었습니다.", HttpStatus.OK);
 	}
 	
@@ -37,8 +39,6 @@ public class TransController {
 	public ResponseEntity<?> transPostList() {
 		
 		List<Trans> transList = transService.getTransList();
-		
-		//System.out.println(transList);	// 잘나옴 member만 빼고
 		
 		return new ResponseEntity<>(transList, HttpStatus.OK);
 		

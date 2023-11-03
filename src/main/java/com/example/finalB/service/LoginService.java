@@ -22,10 +22,11 @@ public class LoginService {
 		return null;
 	}
 	
-//	public String userInfo() {
-//		String username = memberrepository.findByUsername().get();
-//	}
-//		
+	public Member getMember(String username) {
+		return memberrepository.findByUsername(username).orElseGet(() -> {
+			return new Member();
+		});
+	}
 }
 
 
