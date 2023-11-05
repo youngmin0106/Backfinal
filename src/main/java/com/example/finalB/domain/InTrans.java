@@ -2,6 +2,8 @@ package com.example.finalB.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,9 +25,12 @@ public class InTrans {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INTRANS_SEQ_GENERATOR")
 	private Integer transId; // 거래중인 게시글 번호
 	
-	@Column(nullable = false)
-	private String transStatus;
-		
+//	@Column(nullable = false)
+//	private String transStatus;
+	
+	@Enumerated(EnumType.STRING)
+	private TransType trans;
+	
 	private boolean sellerChk;
 	
 	private boolean buyerChk;
