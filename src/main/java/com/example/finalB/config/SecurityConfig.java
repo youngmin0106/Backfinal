@@ -74,5 +74,7 @@ public class SecurityConfig {
 		// 인증매니저 리턴시키면서 @Bean으로 등록
 		return authenticationConfiguration.getAuthenticationManager();
 	}
+	
+	
 
 }

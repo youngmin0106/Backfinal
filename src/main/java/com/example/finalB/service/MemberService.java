@@ -105,7 +105,8 @@ public class MemberService {
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
 
-		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
+
+		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, password);
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
 		String jwt = jwtService.getToken(auth.getName());
@@ -120,34 +121,35 @@ public class MemberService {
 				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").body(body);
 	}
 
+
 	public String getKakaoAccessToken(String code) {
 
-		// Header에다가 심을 것
-		HttpHeaders header = new HttpHeaders();
+	      HttpHeaders header = new HttpHeaders();
 
-		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+	      header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-		// body에다가 심을 것들 ( Kakao에서 시킴 )
-		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+	      // body에다가 심을 것들 ( Kakao에서 시킴 )
+	      MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 
-		body.add("grant_type", "authorization_code");
-		body.add("client_id", "ccc3b6d2fedd138aa407aa4112b315cd"); // 각자 rest api key
-		body.add("redirect_uri", "http://localhost:3000/oauth/kakao");
-		body.add("code", code);
+	      body.add("grant_type", "authorization_code");
+	      body.add("client_id", "ccc3b6d2fedd138aa407aa4112b315cd"); // 각자 rest api key
+	      body.add("redirect_uri", "http://localhost:3000/oauth/kakao");
+	      body.add("code", code);
 
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, header);
+	      HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, header);
 
-		RestTemplate restTemplate = new RestTemplate();
+	      RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<String> response = restTemplate.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST,
-				request, String.class);
+	      ResponseEntity<String> response = restTemplate.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST,
+	            request, String.class);
 
-		String json = response.getBody();
+	      String json = response.getBody();
 
-		Gson gson = new Gson();
-		Map<?, ?> data = gson.fromJson(json, Map.class);
+	      Gson gson = new Gson();
+	      Map<?, ?> data = gson.fromJson(json, Map.class);
 
-		return (String) data.get("access_token");
+	      return (String) data.get("access_token");
+
 
 	}
 
