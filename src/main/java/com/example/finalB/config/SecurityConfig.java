@@ -39,10 +39,9 @@ public class SecurityConfig {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", 
-				"/idoverlap", "/idserch", "/pwchange", "/insertTrans").permitAll()
-		
+				"/idoverlap", "/idserch", "/pwchange", "/insertTrans" , "/**", "/notice" , "/onetoone" ,"/questions" ).permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
-				.antMatchers(HttpMethod.GET, "/board", "/userInfo").permitAll().anyRequest().authenticated().and()
+				.antMatchers(HttpMethod.GET, "/board", "/userInfo" , "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
