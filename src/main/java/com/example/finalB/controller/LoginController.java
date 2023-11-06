@@ -35,7 +35,7 @@ public class LoginController {
 		return memberService.getResponseEntity(username, password);
 	
 		}
-	}
+	
 	
 	@GetMapping("/userInfo")			// 필터쪽에 인증 객체를 만들어놔서 가능
 	public ResponseEntity<?> userInfo(Authentication authentication) {
@@ -48,6 +48,7 @@ public class LoginController {
 		return new ResponseEntity<>(member, HttpStatus.OK);
 	}
 
+}
 
 
 

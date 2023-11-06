@@ -2,7 +2,6 @@ package com.example.finalB.service;
 
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -91,39 +90,35 @@ public class MemberService {
 	}
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
-<<<<<<< HEAD
-		
+
 		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, password);
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
 		String jwt = jwtService.getToken(auth.getName());
-		
+
 		Member member = memberRepository.findById(username).get();
-		
+
 		MultiValueMap<String, Member> body = new LinkedMultiValueMap<>();
 
 		body.add("member", member);
-		
+
 		return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
 				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").body(body);
 	}
-=======
-	      
-	      UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
 
-	      Authentication auth = authenticationManager.authenticate(upaToken);
-	      String jwt = jwtService.getToken(auth.getName());
-	      
-	      Member member = memberRepository.findById(username).get();
-	      
-	      MultiValueMap<String, Member> body = new LinkedMultiValueMap<>();
-
-	      body.add("member", member);
-	      
-	      return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
-	            .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").body(body);
-	   }
->>>>>>> develop
+//	UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
+//
+//	Authentication auth = authenticationManager.authenticate(upaToken);
+//	String jwt = jwtService.getToken(auth.getName());
+//
+//	Member member = memberRepository.findById(username).get();
+//
+//	MultiValueMap<String, Member> body = new LinkedMultiValueMap<>();
+//
+//	body.add("member",member);
+//
+//	return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,"Bearer "+jwt).header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,"Authorization").body(body);
+//	}
 
 	public String getKakaoAccessToken(String code) {
 
@@ -193,6 +188,3 @@ public class MemberService {
 	}
 
 }
-
-
-
