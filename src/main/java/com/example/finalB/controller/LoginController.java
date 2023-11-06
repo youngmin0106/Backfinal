@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.finalB.domain.Member;
 import com.example.finalB.service.LoginService;
+import com.example.finalB.service.MemberService;
 
 @RestController
 public class LoginController {
 	
 	@Autowired
-	LoginService loginservice;
+	private LoginService loginservice;
+	
+	@Autowired
+	private MemberService memberService; 
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Member member) {
@@ -25,17 +29,13 @@ public class LoginController {
 		String username = member.getUsername();
 		String password = member.getPassword();
 		
-		Member loginIdPw = loginservice.loginIdPwChk(username, password);
+		System.out.println(memberService.getResponseEntity(username, password));
 		
-		System.out.println(username);
-		System.out.println(password);
-		
-		if (loginIdPw != null) {
-			return new ResponseEntity<>(loginIdPw, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
+//		Member loginIdPw = memberService.getResponseEntity(username, password);
+		return memberService.getResponseEntity(username, password);
+	
 		}
-	}
+	
 	
 	@GetMapping("/userInfo")			// 필터쪽에 인증 객체를 만들어놔서 가능
 	public ResponseEntity<?> userInfo(Authentication authentication) {
@@ -49,6 +49,9 @@ public class LoginController {
 	}
 
 }
+
+
+
 
 
 

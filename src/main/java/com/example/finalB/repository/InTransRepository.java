@@ -1,17 +1,16 @@
 package com.example.finalB.repository;
 
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.finalB.domain.Trans;
+import com.example.finalB.domain.InTrans;
+import com.example.finalB.domain.Member;
 
 @Repository
-public interface TransRepository extends JpaRepository<Trans, Integer>{
+public interface InTransRepository extends JpaRepository<InTrans, Integer> {
 
-	public List<Trans> findAllByOrderByIdDesc();
 	
-
 }

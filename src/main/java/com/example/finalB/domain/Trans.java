@@ -2,8 +2,12 @@ package com.example.finalB.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,4 +57,9 @@ public class Trans {
 	@ManyToOne
 	@JoinColumn(name = "memberid") // 외래키 어노테이션 (외래키이름)
 	private Member member; // 작성자
+	
+	@Enumerated(EnumType.STRING)
+	private TransType trans;
+	
+	
 }
