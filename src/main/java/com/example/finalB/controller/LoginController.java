@@ -30,8 +30,6 @@ public class LoginController {
 		String password = member.getPassword();
 		
 //		Member loginIdPw = memberService.getResponseEntity(username, password);
-		
-
 		return memberService.getResponseEntity(username, password);
 	
 		}
@@ -51,7 +49,7 @@ public class LoginController {
 }
 
 
-
+}
 
 
 

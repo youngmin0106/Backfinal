@@ -106,19 +106,6 @@ public class MemberService {
 				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization").body(body);
 	}
 
-//	UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, "kagoo123");
-//
-//	Authentication auth = authenticationManager.authenticate(upaToken);
-//	String jwt = jwtService.getToken(auth.getName());
-//
-//	Member member = memberRepository.findById(username).get();
-//
-//	MultiValueMap<String, Member> body = new LinkedMultiValueMap<>();
-//
-//	body.add("member",member);
-//
-//	return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION,"Bearer "+jwt).header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,"Authorization").body(body);
-//	}
 
 	public String getKakaoAccessToken(String code) {
 

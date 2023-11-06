@@ -39,10 +39,9 @@ public class SecurityConfig {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", 
-				"/idoverlap", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans").permitAll()
+				"/idoverlap", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans", "/").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
 				.antMatchers(HttpMethod.GET, "/board", "/userInfo").permitAll().anyRequest().authenticated().and()
-
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -75,5 +74,7 @@ public class SecurityConfig {
 		// 인증매니저 리턴시키면서 @Bean으로 등록
 		return authenticationConfiguration.getAuthenticationManager();
 	}
+	
+	
 
 }

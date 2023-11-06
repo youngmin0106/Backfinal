@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.finalB.domain.InTrans;
+import com.example.finalB.domain.Trans;
+import com.example.finalB.domain.TransType;
 import com.example.finalB.repository.InTransRepository;
 
 @Service
@@ -13,6 +15,14 @@ public class InTransactionService {
 
 	@Autowired
 	private InTransRepository inTransRepository; 
+	
+	
+	public void startTrans(InTrans intrans) {
+//		trans.setTrans(TransType.READY); // 게시글 등록시 거래대기중으로 설정
+		
+		intrans.setTrans(TransType.ING);
+		inTransRepository.save(intrans);
+	}
 	
 	@Transactional
 	public void changeSellerChk(int id) {
