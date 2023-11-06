@@ -29,6 +29,8 @@ public class LoginController {
 		String username = member.getUsername();
 		String password = member.getPassword();
 		
+		System.out.println(memberService.getResponseEntity(username, password));
+		
 //		Member loginIdPw = memberService.getResponseEntity(username, password);
 		return memberService.getResponseEntity(username, password);
 	

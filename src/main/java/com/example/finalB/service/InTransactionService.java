@@ -1,5 +1,7 @@
 package com.example.finalB.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.example.finalB.domain.InTrans;
 import com.example.finalB.domain.Trans;
 import com.example.finalB.domain.TransType;
 import com.example.finalB.repository.InTransRepository;
+import com.example.finalB.repository.TransRepository;
 
 @Service
 public class InTransactionService {
@@ -16,6 +19,8 @@ public class InTransactionService {
 	@Autowired
 	private InTransRepository inTransRepository; 
 	
+	@Autowired
+	private TransRepository transRepository;
 	
 	public void startTrans(InTrans intrans) {
 //		trans.setTrans(TransType.READY); // 게시글 등록시 거래대기중으로 설정
@@ -23,6 +28,14 @@ public class InTransactionService {
 		intrans.setTrans(TransType.ING);
 		inTransRepository.save(intrans);
 	}
+	
+	
+//	public List<Trans> findInTrans(String username) {
+//		
+//	
+//	
+//	}
+	
 	
 	@Transactional
 	public void changeSellerChk(int id) {

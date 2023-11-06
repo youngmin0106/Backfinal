@@ -36,7 +36,7 @@ public class Member {
 	@Column(length = 100) // null 값 가질 수 없음, 크기=20
 	private String name; // 이름
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	private String email; // 이메일
 
 	@Column(length = 13)
