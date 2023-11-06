@@ -1,7 +1,9 @@
 package com.example.finalB.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,16 +30,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Cs")
+@Table(name = "Onetoone")
 @SequenceGenerator(
-		name = "CS_SEQ_GENERATOR", 
-		sequenceName = "CS_SEQ", 
+		name = "ONETOONE_SEQ_GENERATOR", 
+		sequenceName = "Onetoone_SEQ", 
 		initialValue = 1, allocationSize = 1)
 @AllArgsConstructor
-public class Cs {
-
+public class OneToOne {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "CS_SEQ_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "ONETOONE_SEQ_GENERATOR")
 	private Integer no; // 게시글 번호
 
 	@Column(nullable = false, length = 100)
@@ -50,12 +54,12 @@ public class Cs {
 	
 	private int cnt; // 조회수
 
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
 	private Member member;
-
-//	@OneToMany(mappedBy = "cs", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//	@OrderBy("no desc")
-//	private List<Reply> replyList;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OrderBy("no desc")
+	private List<Reply> replyList;
 }
