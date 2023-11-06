@@ -55,7 +55,7 @@ public class TransController {
 
 	@PutMapping("/updateTrans")
 	public ResponseEntity<?> updateTrans(@RequestBody Trans trans) {
-		System.out.println(trans);
+		
 		transService.updateTrans(trans);
 
 		return new ResponseEntity<String>("수정 완료되었습니다.", HttpStatus.OK);
@@ -64,7 +64,15 @@ public class TransController {
 
 	@DeleteMapping("/deleteTrans/{id}")
 	public ResponseEntity<?> deleteTrans(@PathVariable Integer id) {
+		
 		transService.deleteTrans(id);
+		
 		return new ResponseEntity<String>("삭제가 완료되었습니다", HttpStatus.OK);
 	}
 }
+
+
+
+
+
+

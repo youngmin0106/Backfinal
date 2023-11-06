@@ -9,5 +9,7 @@ import com.example.finalB.domain.Questions;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Questions, Integer>{
+	
 	public List<Questions> findAllByOrderByNoDesc();
+	
 }

@@ -26,7 +26,6 @@ public class QuestionService {
 
 	}
 	
-	
 	//하나게시물
 	public Questions getQuestion(Integer no) {
 		
@@ -39,6 +38,7 @@ public class QuestionService {
 	}
 	//수정
 	public void updateQuestion(Questions questions) {
+		
 		Questions oriQuestion = (Questions)questionRepository.findById(questions.getNo()).get();
 		
 		oriQuestion.setTitle(questions.getTitle());

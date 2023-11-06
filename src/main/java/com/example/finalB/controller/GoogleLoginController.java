@@ -23,7 +23,6 @@ public class GoogleLoginController {
 	      // String으로 했기 때문에 accessToken을 뽑아서 보내줌
 	      Member member = memberService.googleLogin(accessToken.get("accessToken"));
 	      
-	      
 	      Member findMember = memberService.getMember(member.getUsername());
 	      System.out.println(member.getUsername());
 	      

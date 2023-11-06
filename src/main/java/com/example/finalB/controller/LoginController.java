@@ -27,9 +27,6 @@ public class LoginController {
 		
 		Member loginIdPw = loginservice.loginIdPwChk(username, password);
 		
-		System.out.println(username);
-		System.out.println(password);
-		
 		if (loginIdPw != null) {
 			return new ResponseEntity<>(loginIdPw, HttpStatus.OK);
 		} else {
@@ -43,7 +40,6 @@ public class LoginController {
 		String username = authentication.getName(); //username
 		
 		Member member = loginservice.getMember(username); // 멤버객체
-		
 		
 		return new ResponseEntity<>(member, HttpStatus.OK);
 	}

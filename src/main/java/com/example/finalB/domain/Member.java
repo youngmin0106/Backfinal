@@ -33,7 +33,7 @@ public class Member {
 	@Column(length = 100)
 	private String password; // 비번
 
-	@Column(length = 100) // null 값 가질 수 없음, 크기=20
+	@Column(length = 100) // 크기=20
 	private String name; // 이름
 
 	@Column(length = 100)

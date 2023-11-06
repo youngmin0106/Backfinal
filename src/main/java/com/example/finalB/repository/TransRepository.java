@@ -12,4 +12,5 @@ import com.example.finalB.domain.Trans;
 public interface TransRepository extends JpaRepository<Trans, Integer>{
 
 	public List<Trans> findAllByOrderByIdDesc();
+	
 }

@@ -19,11 +19,13 @@ import com.example.finalB.service.ReplyService;
 
 @RestController
 public class ReplyController {
+	
 	@Autowired
 	private ReplyService replyService;
 
 	@PostMapping("/reply/{no}")
 	public @ResponseBody ResponseDTO<?> insertReply(@PathVariable int no, Reply reply, HttpSession session) {
+		
 		Member member = (Member) session.getAttribute("principal");
 
 		replyService.insertReply(no, reply, member);
@@ -48,3 +50,9 @@ public class ReplyController {
 	}
 
 }
+
+
+
+
+
+

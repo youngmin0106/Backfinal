@@ -32,9 +32,6 @@ public class IdPwSerchController {
 		String phone = member.getPhone();
 		String newPassword = member.getPassword();
 
-		System.out.println(phone);
-		System.out.println(newPassword);
-
 		Member findMember = memberService.getIdPassword(phone);
 
 		findMember.setPassword(newPassword);

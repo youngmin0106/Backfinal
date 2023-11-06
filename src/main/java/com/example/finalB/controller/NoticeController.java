@@ -24,13 +24,13 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
+	
 	@Autowired
 	private CsRepository csRepository;
 
 	@PostMapping("/notice") // 게시물추가
 	public ResponseEntity<?> insertNotice(@RequestBody Cs cs) {
 		noticeService.insertNotice(cs);
-//		System.out.println(cs);
 
 		return new ResponseEntity<>("공지사항 작성 완료", HttpStatus.OK);
 	}
@@ -38,7 +38,7 @@ public class NoticeController {
 	@GetMapping("/notice") // 게시물리스트
 	public ResponseEntity<?> getNoticeList() {
 		List<Cs> noticeList = noticeService.getNoticeList();
-		System.out.println(noticeList);
+		
 		return new ResponseEntity<>(noticeList, HttpStatus.OK);
 	}
 
@@ -67,7 +67,9 @@ public class NoticeController {
 
 	@PutMapping("/notice/{no}/views")
 	public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
+		
 		Optional<Cs> noticeOptional = csRepository.findById(no);
+		
 		if (noticeOptional.isPresent()) {
 			Cs cs = noticeOptional.get();
 			cs.setCnt(cs.getCnt() + 1);

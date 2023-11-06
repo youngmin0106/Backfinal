@@ -21,8 +21,10 @@ import com.example.finalB.service.OnetoOneService;
 
 @RestController
 public class OnetoOneController {
+	
 	@Autowired
 	private OnetoOneService onetoOneService;
+	
 	@Autowired
 	private OnetoOneRepositroy onetoOneRepositroy;
 
@@ -36,6 +38,7 @@ public class OnetoOneController {
 
 	@GetMapping("/onetoone") // 게시물리스트
 	public ResponseEntity<?> getOnetooneList() {
+		
 		List<OneToOne> oneTooneList = onetoOneService.getOneTooneList();
 
 		return new ResponseEntity<>(oneTooneList, HttpStatus.OK);
@@ -43,6 +46,7 @@ public class OnetoOneController {
 
 	@GetMapping("/onetoone/{no}") // 하나게시물만 보기
 	public ResponseEntity<?> getOnetoone(@PathVariable Integer no) {
+		
 		OneToOne onetoone = onetoOneService.getOnetoOne(no);
 
 		return new ResponseEntity<>(onetoone, HttpStatus.OK);
@@ -66,7 +70,9 @@ public class OnetoOneController {
 
 	@PutMapping("/onetoone/{no}/views")
 	public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
+		
 		Optional<OneToOne> oneTooneOptional = onetoOneRepositroy.findById(no);
+		
 		if (oneTooneOptional.isPresent()) {
 			OneToOne oneToone = oneTooneOptional.get();
 			oneToone.setCnt(oneToone.getCnt() + 1);

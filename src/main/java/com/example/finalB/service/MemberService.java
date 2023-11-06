@@ -54,12 +54,14 @@ public class MemberService {
 	}
 	
 	public Member getMember(String username) {
+		
 		return memberRepository.findByUsername(username).orElseGet(() -> {
 			return new Member();
 		});
 	}
 	
 	public Member getIdPassword(String phone) {
+		
 		return memberRepository.findByPhone(phone).orElseGet(() -> {
 			return new Member();
 		});
@@ -70,6 +72,7 @@ public class MemberService {
     }
 
 	public Member googleLogin(String token) {
+		
 		RestTemplate restTemplate = new RestTemplate();
 
 		String userInfoEndPoint = "https://www.googleapis.com/oauth2/v1/userinfo";

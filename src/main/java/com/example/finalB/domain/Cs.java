@@ -55,7 +55,9 @@ public class Cs {
 	@JoinColumn(name = "memberid")
 	private Member member;
 
-//	@OneToMany(mappedBy = "cs", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//	@OrderBy("no desc")
-//	private List<Reply> replyList;
+
 }
+
+
+
+

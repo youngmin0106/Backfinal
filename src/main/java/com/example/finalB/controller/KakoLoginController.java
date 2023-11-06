@@ -40,14 +40,10 @@ public class KakoLoginController {
 	      
 	      String code = kakaoCode.get("code");
 	      
-	      System.out.println("코드 : " + code);
-	      
 	      String accessToken = memberService.getKakaoAccessToken(code);
-	      System.out.println("토큰 : " + accessToken);
 	      
 	      Member userInfo = memberService.kakaoLogin(accessToken);
-	      System.out.println(userInfo);
-	      
+
 	      Member findMember = memberService.getMember(userInfo.getUsername());
 	      
 	      if(findMember.getUsername() == null)

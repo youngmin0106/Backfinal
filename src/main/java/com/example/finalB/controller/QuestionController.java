@@ -24,6 +24,7 @@ public class QuestionController {
 
 	@Autowired
 	private QuestionService questionService;
+	
 	@Autowired
 	private QuestionRepository questionRepository;
 
@@ -37,6 +38,7 @@ public class QuestionController {
 
 	@GetMapping("/questions") // 게시물리스트
 	public ResponseEntity<?> getquestionList() {
+		
 		List<Questions> questionList = questionService.getQuestionList();
 
 		return new ResponseEntity<>(questionList, HttpStatus.OK);
@@ -44,6 +46,7 @@ public class QuestionController {
 
 	@GetMapping("/questions/{no}") // 하나게시물만 보기
 	public ResponseEntity<?> getquestion(@PathVariable Integer no) {
+		
 		Questions questions = questionService.getQuestion(no);
 
 		return new ResponseEntity<>(questions, HttpStatus.OK);
@@ -67,7 +70,9 @@ public class QuestionController {
 
 	@PutMapping("/questions/{no}/views")
 	public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
+		
 		Optional<Questions> questionOptional = questionRepository.findById(no);
+		
 		if (questionOptional.isPresent()) {
 			Questions questions = questionOptional.get();
 			questions.setCnt(questions.getCnt() + 1);

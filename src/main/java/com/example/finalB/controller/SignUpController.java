@@ -20,8 +20,6 @@ public class SignUpController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody Member member) {
 
-		System.out.println(member.toString());
-
 		Member findMemberUsername = signupservice.getMember(member.getUsername());
 
 		if (findMemberUsername.getUsername() == null) {
@@ -36,15 +34,11 @@ public class SignUpController {
 	@PostMapping("/idoverlap")
 	public ResponseEntity<?> overLapIdCheck(@RequestBody Member member) {
 
-		System.out.println(member.getUsername());
-		
 		Member overLapIdchk = signupservice.getMember(member.getUsername());
 
 		if (overLapIdchk.getUsername() != null && overLapIdchk.getUsername().equals(member.getUsername())) {
-			System.out.println("중복 아이디");
 			return new ResponseEntity<>("사용불가 아이디", HttpStatus.BAD_REQUEST);
 		} else {
-			System.out.println("사용가능 아이디");
 			return new ResponseEntity<>("사용가능 아이디", HttpStatus.OK);
 		}
 	}
