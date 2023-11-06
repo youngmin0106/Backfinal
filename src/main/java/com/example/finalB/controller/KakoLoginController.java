@@ -40,10 +40,10 @@ public class KakoLoginController {
 	      
 	      String code = kakaoCode.get("code");
 	      
-	      System.out.println(code);
+	      System.out.println("코드 " + code);
 	      
 	      String accessToken = memberService.getKakaoAccessToken(code);
-	      System.out.println(accessToken);
+	      System.out.println("토큰 " + accessToken);
 	      
 	      Member userInfo = memberService.kakaoLogin(accessToken);
 	      System.out.println(userInfo);
@@ -53,7 +53,7 @@ public class KakoLoginController {
 	      if(findMember.getUsername() == null)
 	         memberService.insertMember(userInfo);
 	      
-	      return memberService.getResponseEntity(userInfo.getUsername(), userInfo.getPassword());
+	      return memberService.getResponseEntity(userInfo.getUsername(), "kagoo123");
 	   }
 
 	

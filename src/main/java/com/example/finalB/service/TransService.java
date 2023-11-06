@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.finalB.domain.Member;
+import com.example.finalB.domain.RoleType;
 import com.example.finalB.domain.Trans;
+import com.example.finalB.domain.TransType;
 import com.example.finalB.repository.TransRepository;
 
 @Service
@@ -20,7 +22,7 @@ public class TransService {
 	
 	// 게시물 등록
 	public void insertTrans(Trans trans) {
-
+		trans.setTrans(TransType.READY); // 게시글 등록시 거래대기중으로 설정
 		transRepository.save(trans);
 	}
 	
