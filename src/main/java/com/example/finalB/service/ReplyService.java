@@ -1,5 +1,7 @@
 package com.example.finalB.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,18 @@ public class ReplyService {
 	private ReplyRepository replyRepository;
 	@Autowired
 	private OnetoOneRepositroy onetoOneRepositroy;
-
+	
+	   public List<Reply> getReplyByNo(int no) {
+	        return replyRepository.findByOnetooneNo(no);
+	    }
+	
 	// 댓글작성
-	public void insertReply(int no, Reply reply, Member member) {
+	public void insertReply( Reply reply ,int no , Member member) {
 
 		OneToOne oneToone = onetoOneRepositroy.findById(no).get();
 
 		reply.setOnetoone(oneToone);
-		reply.setMember(member);
-
+	
 		replyRepository.save(reply);
 	}
 
@@ -37,10 +42,7 @@ public class ReplyService {
 
 	@Transactional
 	public void updateReply(Reply reply) {
-		// 어차피 아이디로 리플리 가져오면 거기에 포스트아이디 있으니까 굳이 set할 필요없음
-		// Post post = (Post)postRepository.findById(reply.getPost().getId()).get();
-		// reply.setPost(post);
-
+	
 		Reply oriReply = (Reply) replyRepository.findById(reply.getId()).get();
 		oriReply.setContent(reply.getContent());
 
