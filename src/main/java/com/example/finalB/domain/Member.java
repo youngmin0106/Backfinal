@@ -36,7 +36,7 @@ public class Member {
 	@Column(length = 100) // null 값 가질 수 없음, 크기=20
 	private String name; // 이름
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	private String email; // 이메일
 
 	@Column(length = 13)
@@ -47,6 +47,10 @@ public class Member {
 
 	@Column(length = 100)
 	private String detailAddress; // 상세주소
+
+	private Integer mileage = 0; // 마일리지 (초기값 0)
+	
+	private Integer transactionPoints = 0; // 거래점수 (초기값 0)
 
 	@Column(length = 8)
 	private String birthdate; // 생년월일
