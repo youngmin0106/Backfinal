@@ -38,9 +38,9 @@ public class SecurityConfig {
 		// 세션 비활성화
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", "/idoverlap", "/insertTrans" , "/oauth/google" ,"/noticewirte").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/**", "/login", "/signup", "/oauth/**", "/idoverlap", "/oauth/kakao", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans", "/notice" , "/onetoone" ,"/questions").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
-				.antMatchers(HttpMethod.GET, "/board", "/userInfo").permitAll().anyRequest().authenticated().and()
+				.antMatchers(HttpMethod.GET, "/board", "/userInfo", "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -73,5 +73,7 @@ public class SecurityConfig {
 		// 인증매니저 리턴시키면서 @Bean으로 등록
 		return authenticationConfiguration.getAuthenticationManager();
 	}
+	
+	
 
 }
