@@ -31,7 +31,7 @@ public class GoogleLoginController {
 	    	  memberService.insertMember(member);
 	      }
 	      
-	      return memberService.getResponseEntity(member.getUsername(), member.getPassword());
+	      return memberService.getResponseEntity(member.getUsername(), "kagoo123");
 	   }
 	
 }
