@@ -47,13 +47,13 @@ public class SignUpService {
 	
 	@Transactional
 	public Member updateUser(Member member) {
-		Member oriUser = memberrepository.findByUsername(member.getUsername()).get();
+		Member updateUser = memberrepository.findByUsername(member.getUsername()).get();
 		
-		oriUser.setUsername(member.getUsername());
-		oriUser.setPassword(passwordEncoder.encode(member.getPassword()));
-		oriUser.setEmail(member.getEmail());
+		updateUser.setUsername(member.getUsername());
+		updateUser.setPassword(passwordEncoder.encode(member.getPassword()));
+		updateUser.setEmail(member.getEmail());
 		
-		return oriUser;
+		return updateUser;
 	}
 	
 }

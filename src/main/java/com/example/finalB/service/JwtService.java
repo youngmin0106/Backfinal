@@ -15,8 +15,8 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
 
-	// 토큰 만료 시간 (상수로 설정)
-	static final long EXPIRATIONTIME = 24 * 60 * 60 * 1000;
+	// 토큰 만료 시간 (상수로 설정) 1개월
+	static final long EXPIRATIONTIME = 60 * 60 * 24 * 30;
 
 	// jwt에서 헤더에 사용할 접두어
 	static final String PREFIX = "Bearer";
@@ -51,6 +51,5 @@ public class JwtService {
 
 		return null;
 	}
-	
-	
+
 }

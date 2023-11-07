@@ -21,6 +21,7 @@ import com.example.finalB.domain.Member;
 import com.example.finalB.repository.MemberRepository;
 import com.google.gson.Gson;
 import com.example.finalB.domain.RoleType;
+import com.example.finalB.domain.Trans;
 import com.example.finalB.domain.OAuthType;
 
 @Service
@@ -68,7 +69,19 @@ public class MemberService {
 	}
 
     public void updateMember(Member member) {
-        memberRepository.save(member);
+    	
+		Member originalMember = memberRepository.findByUsername(member.getUsername()).get();
+		
+		originalMember.setPassword(passwordEncoder.encode(member.getPassword()));
+		originalMember.setName(member.getName());
+		originalMember.setEmail(member.getEmail());
+		originalMember.setPhone(member.getPhone());
+		originalMember.setAddress(member.getAddress());
+		originalMember.setDetailAddress(member.getDetailAddress());
+		originalMember.setBirthdate(member.getBirthdate());
+		
+		memberRepository.save(originalMember);
+
     }
 
 	public Member googleLogin(String token) {

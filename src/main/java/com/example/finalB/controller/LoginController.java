@@ -24,20 +24,12 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Member member) {
-
+		
 		String username = member.getUsername();
 		String password = member.getPassword();
-
-		Member loginIdPw = loginservice.loginIdPwChk(username, password);
-
-		System.out.println(username);
-		System.out.println(password);
-
-		if (loginIdPw != null) {
-			return new ResponseEntity<>(loginIdPw, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
-		}
+		
+		return memberService.getResponseEntity(username, password);
+	
 	}
 
 	@GetMapping("/userInfo") // 필터쪽에 인증 객체를 만들어놔서 가능
