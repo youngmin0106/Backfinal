@@ -13,5 +13,6 @@ public interface TransRepository extends JpaRepository<Trans, Integer>{
 
 	public List<Trans> findAllByOrderByIdDesc();
 	
-
+	
+	public List<Trans> findByMemberUsernameOrderByIdDesc(String username);
 }

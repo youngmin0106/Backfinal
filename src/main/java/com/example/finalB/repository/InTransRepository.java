@@ -12,5 +12,8 @@ import com.example.finalB.domain.Member;
 @Repository
 public interface InTransRepository extends JpaRepository<InTrans, Integer> {
 
+	Optional<InTrans> findByPostId(Integer id);
+	
+	Optional<InTrans> findByBuyerId(String username);
 	
 }

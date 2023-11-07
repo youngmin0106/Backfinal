@@ -30,11 +30,16 @@ public class InTransactionService {
 	}
 	
 	
-//	public List<Trans> findInTrans(String username) {
-//		
-//	
-//	
-//	}
+	
+	public InTrans getIntrans(Integer id) {
+		
+		return inTransRepository.findByPostId(id).get();
+	}
+	
+	public InTrans getIntransBuyInfo(String username) {
+		
+		return inTransRepository.findByBuyerId(username).get();
+	}
 	
 	
 	@Transactional

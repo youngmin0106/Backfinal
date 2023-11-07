@@ -52,5 +52,14 @@ public class TransService {
 	public void deleteTrans(Integer id) {
 		transRepository.deleteById(id);
 	}
+	
+	// 해당 유저가 판매중인 목록 가져오기
+	public List<Trans> userTransList(String username) {
+		
+		return transRepository.findByMemberUsernameOrderByIdDesc(username);
+		
+	}
+	
+	
 
 }
