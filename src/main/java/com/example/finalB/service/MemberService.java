@@ -122,7 +122,7 @@ public class MemberService {
 		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, password);
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
-		String jwt = jwtService.getToken(auth.getName());
+		String jwt = jwtService.getToken(auth.getName(), RoleType.MEMBER);
 
 		Member member = memberRepository.findById(username).get();
 

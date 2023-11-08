@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
+import com.example.finalB.domain.RoleType;
+
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -15,41 +18,58 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
 
-	// 토큰 만료 시간 (상수로 설정) 1개월
 	static final long EXPIRATIONTIME = 60 * 60 * 24 * 30;
 
-	// jwt에서 헤더에 사용할 접두어
 	static final String PREFIX = "Bearer";
 
-	// 서명에 사용될 암호화시킨 Key
 	static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-	// jwt 발급해주는 메소드
-	public String getToken(String username) {
-		String token = Jwts.builder().setSubject(username) // jwt 클레임 설정
-				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME)) // 토큰 만료시간
-				.signWith(key) // 서명
-				.compact();
+	public class UserClaims {
+		
+		private String username;
+		private RoleType roleType;
 
+		public UserClaims(String username, RoleType roleType) {
+			this.username = username;
+			this.roleType = roleType;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public RoleType getRoleType() {
+			return roleType;
+		}
+	}
+
+	public String getToken(String username, RoleType roleType) {
+		String token = Jwts.builder().setSubject(username).claim("role", roleType.name())
+				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME)).signWith(key).compact();
+		
 		return token;
 	}
 
-	// 토큰 추출해서 검사, 사용자 이름을 리턴
-	public String getAuthUser(HttpServletRequest request) {
-
+	public UserClaims getAuthUser(HttpServletRequest request) {
 		String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-		// 토큰안에 들어있는 Username만 뽑아냄
 		if (token != null) {
-			String user = Jwts.parserBuilder() // 하나하나 분리시킴
-					.setSigningKey(key).build().parseClaimsJws(token.replace(PREFIX, "")) // prefix 붙은거 지우기
-					.getBody().getSubject();
+			Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token.replace(PREFIX, ""))
+					.getBody();
 
-			if (user != null)
-				return user;
+			String user = claims.getSubject();
+			String roleTypeString = (String) claims.get("role");
+			
+			System.out.println("유저 : " + user);
+			System.out.println("롤 타입 : " + roleTypeString);
+
+			if (user != null && roleTypeString != null) {
+
+				RoleType roleType = RoleType.valueOf(roleTypeString);
+				return new UserClaims(user, roleType);
+			}
 		}
 
 		return null;
 	}
-
 }

@@ -54,7 +54,7 @@ public class SignUpController {
 		System.out.println(member.toString());
 		memberService.updateMember(member);
 
-		return new ResponseEntity<String>("카카오 간편 회원가입 완료.", HttpStatus.OK);
+		return new ResponseEntity<String>("회원가입 완료.", HttpStatus.OK);
 		
 	}
 	

@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import com.example.finalB.domain.RoleType;
 import com.example.finalB.filter.JwtFilter;
 import com.example.finalB.security.AuthEntryPoint;
 
@@ -36,12 +37,14 @@ public class SecurityConfig {
 		http.cors(); // 크로스 오리진 할거다 미리 적음 (아래 CorsConfigurationSource은 이게 있기 때문에 작동할 수 있는거)
 
 		// 세션 비활성화
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", 
-				"/idoverlap", "/idserch", "/pwchange", "/notice" , "/onetoone" ,"/questions").permitAll()
+		http.authorizeRequests()
+				.antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", "/idoverlap", "/idserch", "/pwchange",
+						"/notice", "/onetoone", "/questions").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans", "/updateMember", "kagoosignup").permitAll()
-				.antMatchers(HttpMethod.GET, "/board", "/userInfo" , "/notice" , "/onetoone" ,"/questions", "/transPost").permitAll().anyRequest().authenticated().and()
+				.antMatchers(HttpMethod.GET, "/board", "/userInfo", "/notice", "/onetoone", "/questions", "/transPost").permitAll()
+				.and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -70,11 +73,10 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
 		// 인증매니저 리턴시키면서 @Bean으로 등록
 		return authenticationConfiguration.getAuthenticationManager();
 	}
-	
-	
 
 }
