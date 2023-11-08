@@ -60,6 +60,17 @@ public class TransService {
 		
 	}
 	
+	// 게시글 정보들 postId로 List 가져오기
+	public List<Trans> getTransByPostIds(List<Integer> postIds) {
+	    return transRepository.findAllById(postIds);
+	}
 	
-
+	// 거래 완료 후 게시물 거래상태 수정
+	@Transactional
+	public void TransDone(Trans trans) {
+		Trans oriTrans = transRepository.findById(trans.getId()).get();
+		
+		oriTrans.setTrans(TransType.DONE);
+	}
+	
 }

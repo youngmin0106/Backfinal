@@ -14,6 +14,8 @@ public interface InTransRepository extends JpaRepository<InTrans, Integer> {
 
 	Optional<InTrans> findByPostId(Integer id);
 	
-	Optional<InTrans> findByBuyerId(String username);
+	List<InTrans> findByBuyerId(String username);
+	
+	List<InTrans> findByTransId(Integer id);
 	
 }
