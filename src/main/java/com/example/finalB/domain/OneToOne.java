@@ -54,7 +54,7 @@ public class OneToOne {
 	
 	private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
 	private Member member;
 	
