@@ -31,5 +31,5 @@ public class GoogleLoginController {
          }
          return memberService.getResponseEntity(member.getUsername(), "kagoo123");
       }
-   
+   //s
 }
