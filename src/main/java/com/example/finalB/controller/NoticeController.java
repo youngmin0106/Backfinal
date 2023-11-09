@@ -33,6 +33,7 @@ public class NoticeController {
 		noticeService.insertNotice(cs);
 
 		return new ResponseEntity<>("공지사항 작성 완료", HttpStatus.OK);
+
 	}
 
 	@GetMapping("/notice") // 게시물리스트

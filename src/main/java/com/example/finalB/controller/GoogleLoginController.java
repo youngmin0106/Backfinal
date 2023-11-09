@@ -13,6 +13,7 @@ import com.example.finalB.service.MemberService;
 
 @RestController
 public class GoogleLoginController {
+
 	
 	@Autowired
 	private MemberService memberService;
@@ -33,8 +34,5 @@ public class GoogleLoginController {
 	   }
 	
 }
-
-
-
 
 
