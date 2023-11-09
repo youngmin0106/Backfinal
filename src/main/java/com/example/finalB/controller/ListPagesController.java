@@ -1,6 +1,8 @@
 package com.example.finalB.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.finalB.domain.InTrans;
 import com.example.finalB.domain.Trans;
+import com.example.finalB.domain.TransType;
 import com.example.finalB.service.InTransactionService;
 import com.example.finalB.service.TransService;
 
@@ -33,20 +36,57 @@ public class ListPagesController {
 		return userSellList;
 	}
 	
-	// listPage 
+	// listPage
+	@GetMapping("/listPages2/{username}")
+	public List<Trans> sellingList(@PathVariable String username) {
+		
+		List<Trans> userSellingList = transService.transINGList(username);
+		
+		return userSellingList;
+		
+	}
+	
+	@GetMapping("/listPages4/{username}")
+	public List<Trans> selldoneList(@PathVariable String username) {
+		
+		List<Trans> userSelldoneList = transService.transDONEList(username);
+		
+		return userSelldoneList;
+	}
 	
 	// listPage 구매중 탭
 	@GetMapping("/listPages5/{username}")
 	public ResponseEntity<?> BuyList(@PathVariable String username) {
 		
+		// username으로 거래중인 게시물 intrans를 List로 가져옴
 		List<InTrans> intrans = inTransactionService.getIntransBuyInfo(username);
-	    System.out.println(intrans);
-	    
+	
+		// List로 뽑은 intrans에서 게시물 번호들을 가져옴
 	    List<Integer> postIds = intrans.stream().map(InTrans::getPostId).collect(Collectors.toList());
+	    
+	    // 뽑은 게시물 번호들로 해당 게시물들 목록을 가져옴
 	    List<Trans> transList = transService.getTransByPostIds(postIds);
-	    System.out.println(transList);
+
 	    
 	    return new ResponseEntity<>(transList, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("/mypage/{username}")
+	public ResponseEntity<?> mypage(@PathVariable String username) {
+		
+		
+		
+		Map<String, Long> mypageList = new HashMap<>();
+		
+		mypageList.put("ready", transService.countList(username, TransType.READY));
+		mypageList.put("ing", transService.countList(username, TransType.ING));
+		mypageList.put("done", transService.countList(username, TransType.DONE));
+		
+	
+		return new ResponseEntity<>(mypageList, HttpStatus.OK);
+		
+		
+	}
+	
 }

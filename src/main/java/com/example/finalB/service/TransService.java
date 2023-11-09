@@ -53,12 +53,25 @@ public class TransService {
 		transRepository.deleteById(id);
 	}
 	
-	// 해당 유저가 판매중인 목록 가져오기
+	// 해당 유저가 등록한 게시물 목록 가져오기
 	public List<Trans> userTransList(String username) {
 		
 		return transRepository.findByMemberUsernameOrderByIdDesc(username);
 		
 	}
+	
+	// 해당 유저가 등록한 게시물중 TransType이 ING(거래중)인 애들만 가져오기
+	public List<Trans> transINGList(String username) {
+		
+		return transRepository.findByMemberUsernameAndTrans(username, TransType.ING);
+	}
+	
+	public List<Trans> transDONEList(String username) {
+		
+		return transRepository.findByMemberUsernameAndTrans(username, TransType.DONE);
+	}
+	
+	
 	
 	// 게시글 정보들 postId로 List 가져오기
 	public List<Trans> getTransByPostIds(List<Integer> postIds) {
@@ -71,6 +84,12 @@ public class TransService {
 		Trans oriTrans = transRepository.findById(trans.getId()).get();
 		
 		oriTrans.setTrans(TransType.DONE);
+	}
+	
+	public Long countList(String username, TransType transType) {
+		
+		return transRepository.countByMemberUsernameAndTrans(username, transType);
+	
 	}
 	
 }
