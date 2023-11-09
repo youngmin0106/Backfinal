@@ -31,8 +31,8 @@ public class NoticeController {
 	
 	@PostMapping("/notice") //게시물추가
 	public ResponseEntity<?> insertNotice(@RequestBody Cs cs){
+		System.out.println(cs);
 		noticeService.insertNotice(cs);
-//		System.out.println(cs);
 			
 		return new ResponseEntity<>("공지사항 작성 완료" , HttpStatus.OK);
 	}
