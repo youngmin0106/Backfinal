@@ -41,7 +41,7 @@ public class SecurityConfig {
 
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", "/idoverlap", "/idserch", "/pwchange",
-						"/notice", "/onetoone", "/questions").permitAll()
+						"/notice", "/onetoone", "/questions", "/oauth/kakao").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans", "/updateMember", "kagoosignup").permitAll()
 				.antMatchers(HttpMethod.GET, "/board", "/userInfo", "/notice", "/onetoone", "/questions", "/transPost").permitAll()
 				.and()

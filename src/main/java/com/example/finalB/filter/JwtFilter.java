@@ -17,32 +17,31 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.finalB.service.JwtService;
-import com.example.finalB.service.JwtService.UserClaims;
+
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private JwtService jwtService;
+   @Autowired
+   private JwtService jwtService;
+   
+   @Override
+   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+         throws ServletException, IOException {
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
-
-		String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-		if (jwt != null) {
-			UserClaims userClaims = jwtService.getAuthUser(request); // 토큰에서 사용자 정보 추출
-
-			if (userClaims != null) {
-				Authentication authentication = new UsernamePasswordAuthenticationToken(userClaims.getUsername(), null,
-						Collections.emptyList());
-
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-			}
-		}
-
-		filterChain.doFilter(request, response);
-	}
-
+      String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
+      
+      if(jwt != null) {
+         String username = jwtService.getAuthUser(request); // 토큰안에 인증된 사용자의 userName
+         
+         Authentication authentication = 
+               new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
+         
+         SecurityContextHolder.getContext().setAuthentication(authentication);
+      }
+      
+      filterChain.doFilter(request, response);
+   }
+   
+   
 }

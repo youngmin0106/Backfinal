@@ -25,7 +25,6 @@ public class GoogleLoginController {
 	      Member member = memberService.googleLogin(accessToken.get("accessToken"));
 	      
 	      Member findMember = memberService.getMember(member.getUsername());
-	      System.out.println(member.getUsername());
 	      
 	      if(findMember.getUsername() == null) {
 	    	  memberService.insertMember(member);

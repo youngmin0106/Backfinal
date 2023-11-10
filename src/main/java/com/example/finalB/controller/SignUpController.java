@@ -51,7 +51,6 @@ public class SignUpController {
 	@PutMapping("/kagoosignup")
 	public ResponseEntity<?> KaGooSignup(@RequestBody Member member) {
 		
-		System.out.println(member.toString());
 		memberService.updateMember(member);
 
 		return new ResponseEntity<String>("회원가입 완료.", HttpStatus.OK);

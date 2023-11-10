@@ -118,11 +118,10 @@ public class MemberService {
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
 
-
 		UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(username, password);
 
 		Authentication auth = authenticationManager.authenticate(upaToken);
-		String jwt = jwtService.getToken(auth.getName(), RoleType.MEMBER);
+		String jwt = jwtService.getToken(auth.getName());
 
 		Member member = memberRepository.findById(username).get();
 
@@ -162,7 +161,6 @@ public class MemberService {
 	      Map<?, ?> data = gson.fromJson(json, Map.class);
 
 	      return (String) data.get("access_token");
-
 
 	}
 

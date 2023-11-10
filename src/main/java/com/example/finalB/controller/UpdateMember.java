@@ -19,7 +19,6 @@ public class UpdateMember {
 	@PutMapping("/updateMember")
 	public ResponseEntity<?> updateMember(@RequestBody Member member) {
 		
-		System.out.println(member.toString());
 		memberService.updateMember(member);
 
 		return new ResponseEntity<String>("변경된 정보로 로그인 하세요.", HttpStatus.OK);
