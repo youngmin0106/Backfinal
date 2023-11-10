@@ -12,10 +12,10 @@ public class UnregisterService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public void unregisterMember(String id) {
+	public void unregisterMember(String username) {
 		
-		System.out.println(id);
+		System.out.println(username);
 		
-		memberRepository.deleteById(id);
+		memberRepository.deleteById(username);
 	}
 }

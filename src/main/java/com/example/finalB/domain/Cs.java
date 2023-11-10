@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -52,8 +54,9 @@ public class Cs {
 	private int cnt; // 조회수
 
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "memberid")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
 
 //	@OneToMany(mappedBy = "cs", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

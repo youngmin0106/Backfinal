@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -54,8 +56,9 @@ public class Trans {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp createdate; // 게시글 등록 일자
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "memberid") // 외래키 어노테이션 (외래키이름)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member; // 작성자
 	
 	@Enumerated(EnumType.STRING)

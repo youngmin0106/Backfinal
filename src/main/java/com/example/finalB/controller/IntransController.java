@@ -57,13 +57,11 @@ public class IntransController {
 		Trans trans = transService.getTrans(id);
 		InTrans intrans = inTransactionService.getIntrans(id);
 		
-		Map<String, Object> test = new HashMap<>();
-		test.put("trans", trans);
-		test.put("intrans", intrans);
+		Map<String, Object> intransInfo = new HashMap<>();
+		intransInfo.put("trans", trans);
+		intransInfo.put("intrans", intrans);
 		
-		System.out.println(test);
-		
-		return new ResponseEntity<>(test, HttpStatus.OK);
+		return new ResponseEntity<>(intransInfo, HttpStatus.OK);
 		
 	}
 	
@@ -95,9 +93,6 @@ public class IntransController {
 		Member seller = memberService.getMember(intrans.getSellerId());
 		Member buyer = memberService.getMember(intrans.getBuyerId());
 
-		System.out.println("판매자 : " + seller);
-		System.out.println("구매자 : " + buyer);
-
 		// 판매자 마일리지 +, (service쪽에서 거래점수도 +1 처리해줌)
 		inTransactionService.sellerAfterTrans(seller, trans.getPrice());
 		
@@ -106,9 +101,6 @@ public class IntransController {
 		
 		transService.TransDone(trans);
 		inTransactionService.IntransDone(intrans);
-		
-//		trans.setTrans(TransType.DONE);
-		
 		
 		return new ResponseEntity<>("인수 완료", HttpStatus.OK);
 	}

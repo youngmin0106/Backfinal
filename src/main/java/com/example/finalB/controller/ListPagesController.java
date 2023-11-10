@@ -79,9 +79,12 @@ public class ListPagesController {
 		
 		Map<String, Long> mypageList = new HashMap<>();
 		
+		List<InTrans> buying = inTransactionService.getIntransBuyInfo(username);
+		
 		mypageList.put("ready", transService.countList(username, TransType.READY));
 		mypageList.put("ing", transService.countList(username, TransType.ING));
 		mypageList.put("done", transService.countList(username, TransType.DONE));
+		mypageList.put("buying", (long) buying.size()); // buying 리스트의 길이
 		
 	
 		return new ResponseEntity<>(mypageList, HttpStatus.OK);

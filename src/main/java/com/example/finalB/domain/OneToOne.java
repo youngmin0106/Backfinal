@@ -19,6 +19,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -54,12 +56,14 @@ public class OneToOne {
 	
 	private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "memberid")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@OrderBy("no desc")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Reply> replyList;
 }
