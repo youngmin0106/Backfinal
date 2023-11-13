@@ -19,6 +19,10 @@ public interface TransRepository extends JpaRepository<Trans, Integer>{
 	// TransType이 ING인 애들만 뽑기
 	List<Trans> findByMemberUsernameAndTrans(String username, TransType transType);
 
+	List<Trans> findByTransAndIdIn(TransType transType, List<Integer> id);
+
 	Long countByMemberUsernameAndTrans(String username, TransType transType); 
+	
+
 	
 }

@@ -20,8 +20,6 @@ public class InTransactionService {
 	@Autowired
 	private InTransRepository inTransRepository; 
 	
-	@Autowired
-	private TransRepository transRepository;
 	
 	public void startTrans(InTrans intrans) {
 //		trans.setTrans(TransType.READY); // 게시글 등록시 거래대기중으로 설정

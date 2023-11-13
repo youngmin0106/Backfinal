@@ -78,6 +78,19 @@ public class TransService {
 	    return transRepository.findAllById(postIds);
 	}
 	
+	public List<Trans> getInTransByPostIds(List<Integer> postIds) {
+      
+        // TransType이 ING이면서 특정 게시물 번호(postId)에 해당하는 거래 찾기
+        return transRepository.findByTransAndIdIn(TransType.ING, postIds);
+    }
+	
+	public List<Trans> getDoneTransByPostIds(List<Integer> postIds) {
+	      
+        // TransType이 ING이면서 특정 게시물 번호(postId)에 해당하는 거래 찾기
+        return transRepository.findByTransAndIdIn(TransType.DONE, postIds);
+    }
+
+	
 	// 거래 완료 후 게시물 거래상태 수정
 	@Transactional
 	public void TransDone(Trans trans) {
