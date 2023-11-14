@@ -26,7 +26,8 @@ public class TransController {
 
 	@Autowired
 	private TransService transService;
-
+	
+	// 계정 판매 목록 
 	@PostMapping("/insertTrans")
 	public @ResponseBody ResponseEntity<?> insertTrans(@RequestBody Trans trans) {
 
@@ -34,8 +35,8 @@ public class TransController {
 
 		return new ResponseEntity<String>("계정 등록 완료되었습니다.", HttpStatus.OK);
 	}
-
-	// 계정 판매 목록
+	
+	// 전체 게시물 리스트
 	@GetMapping("/transPost")
 	public ResponseEntity<?> transPostList() {
 
@@ -44,7 +45,8 @@ public class TransController {
 		return new ResponseEntity<>(transList, HttpStatus.OK);
 
 	}
-
+	
+	// 해당 게시물 정보
 	@GetMapping("/transDetail/{id}")
 	public ResponseEntity<?> getTrans(@PathVariable Integer id) {
 
@@ -52,7 +54,8 @@ public class TransController {
 
 		return new ResponseEntity<>(trans, HttpStatus.OK);
 	}
-
+	
+	// 해당 게시물 수정
 	@PutMapping("/updateTrans")
 	public ResponseEntity<?> updateTrans(@RequestBody Trans trans) {
 		
@@ -61,7 +64,8 @@ public class TransController {
 		return new ResponseEntity<String>("수정 완료되었습니다.", HttpStatus.OK);
 
 	}
-
+	
+	// 해당 게시물 삭제
 	@DeleteMapping("/deleteTrans/{id}")
 	public ResponseEntity<?> deleteTrans(@PathVariable Integer id) {
 		
