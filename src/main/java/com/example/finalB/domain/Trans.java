@@ -56,9 +56,8 @@ public class Trans {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp createdate; // 게시글 등록 일자
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid") // 외래키 어노테이션 (외래키이름)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member; // 작성자
 	
 	@Enumerated(EnumType.STRING)

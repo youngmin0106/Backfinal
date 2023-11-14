@@ -47,9 +47,8 @@ public class Reply {
 	   //하나의 작성자는 여러개의 댓글을 작성할 수 있나   @ManyToOne
 	   //여러 작성자는 하나의 댓글만 작성할 수 있나		@OneToMany
 	   //여러 작성자는 여러 댓글 작성할수있나			@ManyToMany
-	   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	   @ManyToOne(fetch = FetchType.EAGER)
 	   @JoinColumn(name = "memberid")
-	   @OnDelete(action = OnDeleteAction.CASCADE)
 	   private Member member;
 	   
 	   @JsonBackReference

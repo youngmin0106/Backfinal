@@ -56,14 +56,12 @@ public class OneToOne {
 	
 	private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
+	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER)
 	@OrderBy("no desc")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Reply> replyList;
 }

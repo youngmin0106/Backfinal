@@ -53,9 +53,8 @@ public class Cs {
 	
 	private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
 
 
