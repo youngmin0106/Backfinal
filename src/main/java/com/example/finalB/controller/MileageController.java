@@ -32,8 +32,6 @@ public class MileageController {
 	@PostMapping("/testSellTrans") 
 	public ResponseEntity<?> turnOverTest(@RequestBody int id) {
 		
-		System.out.println(id);
-		
 		inTransactionService.changeSellerChk(id);
 		
 		return new ResponseEntity<>("인계 완료", HttpStatus.OK);
@@ -43,8 +41,6 @@ public class MileageController {
 	public ResponseEntity<?> takeOverTest(@RequestBody int id) {
 		
 		inTransactionService.changeBuyerChk(id);
-		
-		
 		
 		return new ResponseEntity<>("인수 완료", HttpStatus.OK);
 	}

@@ -39,13 +39,10 @@ public class KakoLoginController {
 	   public ResponseEntity<?> kakaoLogin(@RequestBody Map<String, String> kakaoCode) {
 	      
 	      String code = kakaoCode.get("code");
-	      System.out.println("컨트롤러 코드" + code);	
 	      
 	      String accessToken = memberService.getKakaoAccessToken(code);
-	      System.out.println("토큰" + accessToken);
 
 	      Member userInfo = memberService.kakaoLogin(accessToken);
-	      System.out.println("유저정보" + userInfo);
 
 	      Member findMember = memberService.getMember(userInfo.getUsername());
 	      

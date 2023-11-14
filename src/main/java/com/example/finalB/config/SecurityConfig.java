@@ -51,8 +51,6 @@ public class SecurityConfig {
 
 		return http.build();
 
-		// 시큐리티가 작동될때 컨트롤러 동작 수행전에 필터가 걸러서 작동함 (컨트롤러 전에 필터가 가로채서 시큐리티작업을 먼저해줌)
-		// 프론트와 백의 포트가 다를때
 	}
 
 	@Bean
