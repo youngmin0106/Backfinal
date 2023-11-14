@@ -40,8 +40,7 @@ public class SecurityConfig {
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/**", "/login", "/signup", "/oauth/**", "/idoverlap", "/oauth/kakao", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans", "/notice" , "/onetoone" ,"/questions").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
-				.antMatchers(HttpMethod.GET, "/board", "/transPost","/transDetail/{id}", "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
-
+				.antMatchers(HttpMethod.GET, "/**", "/transPost","/transDetail/{id}", "/intransInfo/**", "/listPages/**", "/board", "/userInfo", "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

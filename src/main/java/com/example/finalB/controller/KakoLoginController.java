@@ -67,6 +67,7 @@ public class KakoLoginController {
 		
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(header);
 		
+		
 		RestTemplate restTemplate = new RestTemplate();
 		
 		ResponseEntity<String> response = restTemplate.exchange("https://kapi.kakao.com/v2/user/me",
