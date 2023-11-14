@@ -39,12 +39,11 @@ public class SecurityConfig {
 		// 세션 비활성화
 //		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/login", "/signup", "/oauth/**", "/idoverlap", "/idserch", "/pwchange",
-						"/notice", "/onetoone", "/questions", "/oauth/kakao").permitAll()
+
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/**", "/login", "/signup", "/oauth/**", "/idoverlap", "/oauth/kakao", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans", "/notice" , "/onetoone" ,"/questions").permitAll()
+		.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
 				.antMatchers(HttpMethod.PUT, "/updateTrans", "/updateMember", "kagoosignup").permitAll()
-				.antMatchers(HttpMethod.GET, "/board", "/userInfo", "/notice", "/onetoone", "/questions", "/transPost").permitAll()
-				.and()
+				.antMatchers(HttpMethod.GET, "/**", "/intransInfo/**", "/listPages/**", "/board", "/userInfo", "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

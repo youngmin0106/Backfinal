@@ -45,4 +45,5 @@ public class MileageController {
 		return new ResponseEntity<>("인수 완료", HttpStatus.OK);
 	}
 
+
 }
