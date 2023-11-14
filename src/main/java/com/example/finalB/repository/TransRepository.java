@@ -20,5 +20,8 @@ public interface TransRepository extends JpaRepository<Trans, Integer>{
 
 	List<Trans> findByTransAndIdIn(TransType transType, List<Integer> id);
 
-	Long countByMemberUsernameAndTrans(String username, TransType transType); 
+	Long countByMemberUsernameAndTrans(String username, TransType transType);
+
+	public List<Trans> findAllByOrderByIdDesc(); 
+	
 }
