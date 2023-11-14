@@ -53,7 +53,7 @@ public class Questions {
 	
 	private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "memberid")
 	private Member member;
 }

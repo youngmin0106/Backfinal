@@ -2,6 +2,7 @@ package com.example.finalB.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -44,8 +47,9 @@ public class Reply {
 	   //하나의 작성자는 여러개의 댓글을 작성할 수 있나   @ManyToOne
 	   //여러 작성자는 하나의 댓글만 작성할 수 있나		@OneToMany
 	   //여러 작성자는 여러 댓글 작성할수있나			@ManyToMany
-	   @ManyToOne(fetch = FetchType.EAGER)
+	   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	   @JoinColumn(name = "memberid")
+	   @OnDelete(action = OnDeleteAction.CASCADE)
 	   private Member member;
 	   
 	   @JsonBackReference
