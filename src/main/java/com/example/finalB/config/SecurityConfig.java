@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import com.example.finalB.domain.RoleType;
 import com.example.finalB.filter.JwtFilter;
 import com.example.finalB.security.AuthEntryPoint;
 
@@ -36,10 +37,12 @@ public class SecurityConfig {
 		http.cors(); // 크로스 오리진 할거다 미리 적음 (아래 CorsConfigurationSource은 이게 있기 때문에 작동할 수 있는거)
 
 		// 세션 비활성화
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/**", "/login", "/signup", "/oauth/**", "/idoverlap", "/oauth/kakao", "/oauth/google", "/mileage", "/verifyIamport/**", "/insertTrans", "/notice" , "/onetoone" ,"/questions").permitAll()
-				.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
+		.antMatchers(HttpMethod.PUT, "/updateTrans").permitAll()
+				.antMatchers(HttpMethod.PUT, "/updateTrans", "/updateMember", "kagoosignup").permitAll()
 				.antMatchers(HttpMethod.GET, "/**", "/intransInfo/**", "/listPages/**", "/board", "/userInfo", "/notice" , "/onetoone" ,"/questions").permitAll().anyRequest().authenticated().and()
 				.exceptionHandling() // 예외 발생했을 때
 				.authenticationEntryPoint(authEntryPoint).and()
@@ -47,8 +50,6 @@ public class SecurityConfig {
 
 		return http.build();
 
-		// 시큐리티가 작동될때 컨트롤러 동작 수행전에 필터가 걸러서 작동함 (컨트롤러 전에 필터가 가로채서 시큐리티작업을 먼저해줌)
-		// 프론트와 백의 포트가 다를때
 	}
 
 	@Bean
@@ -69,11 +70,10 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
 		// 인증매니저 리턴시키면서 @Bean으로 등록
 		return authenticationConfiguration.getAuthenticationManager();
 	}
-	
-	
 
 }

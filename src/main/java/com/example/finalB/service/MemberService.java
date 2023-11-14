@@ -21,6 +21,7 @@ import com.example.finalB.domain.Member;
 import com.example.finalB.repository.MemberRepository;
 import com.google.gson.Gson;
 import com.example.finalB.domain.RoleType;
+import com.example.finalB.domain.Trans;
 import com.example.finalB.domain.OAuthType;
 
 @Service
@@ -52,8 +53,39 @@ public class MemberService {
 		memberRepository.save(member);
 
 	}
+	
+	public Member getMember(String username) {
+		
+		return memberRepository.findByUsername(username).orElseGet(() -> {
+			return new Member();
+		});
+	}
+	
+	public Member getIdPassword(String phone) {
+		
+		return memberRepository.findByPhone(phone).orElseGet(() -> {
+			return new Member();
+		});
+	}
+
+    public void updateMember(Member member) {
+    	
+		Member originalMember = memberRepository.findByUsername(member.getUsername()).get();
+		
+		originalMember.setPassword(passwordEncoder.encode(member.getPassword()));
+		originalMember.setName(member.getName());
+		originalMember.setEmail(member.getEmail());
+		originalMember.setPhone(member.getPhone());
+		originalMember.setAddress(member.getAddress());
+		originalMember.setDetailAddress(member.getDetailAddress());
+		originalMember.setBirthdate(member.getBirthdate());
+		
+		memberRepository.save(originalMember);
+
+    }
 
 	public Member googleLogin(String token) {
+		
 		RestTemplate restTemplate = new RestTemplate();
 
 		String userInfoEndPoint = "https://www.googleapis.com/oauth2/v1/userinfo";
@@ -83,11 +115,6 @@ public class MemberService {
 		return member;
 	}
 
-	public Member getMember(String username) {
-		return memberRepository.findByUsername(username).orElseGet(() -> {
-			return new Member();
-		});
-	}
 
 	public ResponseEntity<?> getResponseEntity(String username, String password) {
 
@@ -109,36 +136,6 @@ public class MemberService {
 
 	public String getKakaoAccessToken(String code) {
 
-//		// Header에다가 심을 것
-//		HttpHeaders header = new HttpHeaders();
-//
-//		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//
-//		// body에다가 심을 것들 ( Kakao에서 시킴 )
-//		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-//
-//		body.add("grant_type", "authorization_code");
-//		body.add("client_id", "ccc3b6d2fedd138aa407aa4112b315cd"); // 각자 rest api key
-//		body.add("redirect_uri", "http://localhost:3000/oauth/kakao");
-//		body.add("code", code);
-//
-//		// ccc3b6d2fedd138aa407aa4112b315cd
-//		
-//		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, header);
-//
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		ResponseEntity<String> response = restTemplate.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST,
-//				request, String.class);
-//
-//		String json = response.getBody();
-//
-//		Gson gson = new Gson();
-//		Map<?, ?> data = gson.fromJson(json, Map.class);
-//
-//		return (String) data.get("access_token");
-		
-		// Header에다가 심을 것
 	      HttpHeaders header = new HttpHeaders();
 
 	      header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -164,7 +161,6 @@ public class MemberService {
 	      Map<?, ?> data = gson.fromJson(json, Map.class);
 
 	      return (String) data.get("access_token");
-
 
 	}
 

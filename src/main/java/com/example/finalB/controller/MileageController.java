@@ -29,6 +29,21 @@ public class MileageController {
 		return new ResponseEntity<>("마일리지 충전 완료", HttpStatus.OK);
 	}
 	
+	@PostMapping("/testSellTrans") 
+	public ResponseEntity<?> turnOverTest(@RequestBody int id) {
+		
+		inTransactionService.changeSellerChk(id);
+		
+		return new ResponseEntity<>("인계 완료", HttpStatus.OK);
+	}
 	
+	@PostMapping("/testBuyTrans")
+	public ResponseEntity<?> takeOverTest(@RequestBody int id) {
+		
+		inTransactionService.changeBuyerChk(id);
+		
+		return new ResponseEntity<>("인수 완료", HttpStatus.OK);
+	}
+
 
 }

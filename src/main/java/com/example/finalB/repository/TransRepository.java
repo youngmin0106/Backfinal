@@ -12,8 +12,7 @@ import com.example.finalB.domain.TransType;
 @Repository
 public interface TransRepository extends JpaRepository<Trans, Integer>{
 
-	public List<Trans> findAllByOrderByIdDesc();
-	
+
 	public List<Trans> findByMemberUsernameOrderByIdDesc(String username);
 	
 	// TransType이 ING인 애들만 뽑기
@@ -21,8 +20,8 @@ public interface TransRepository extends JpaRepository<Trans, Integer>{
 
 	List<Trans> findByTransAndIdIn(TransType transType, List<Integer> id);
 
-	Long countByMemberUsernameAndTrans(String username, TransType transType); 
-	
+	Long countByMemberUsernameAndTrans(String username, TransType transType);
 
+	public List<Trans> findAllByOrderByIdDesc(); 
 	
 }

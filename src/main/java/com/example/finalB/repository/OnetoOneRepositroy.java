@@ -9,5 +9,7 @@ import com.example.finalB.domain.OneToOne;
 
 @Repository
 public interface OnetoOneRepositroy extends JpaRepository<OneToOne, Integer>{
+	
 	public List<OneToOne> findAllByOrderByNoDesc();
+	
 }

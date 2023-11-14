@@ -22,42 +22,41 @@ import com.example.finalB.service.ReplyService;
 
 @RestController
 public class ReplyController {
+
 	@Autowired
 	private ReplyService replyService;
-	
-	 @GetMapping("reply/{no}/list")
-	    public ResponseEntity<List<Reply>> getReplyByNo(@PathVariable int no) {
-	        List<Reply> reply = replyService.getReplyByNo(no);
-	        return new ResponseEntity<>(reply, HttpStatus.OK);
-	    }
-	
-	
-	@PostMapping("/reply/{no}")
-	public  ResponseEntity<?> insertReply(@PathVariable int no , @RequestBody Reply reply , HttpSession session){
-		Member member = (Member)session.getAttribute("principal");
 
-		replyService.insertReply(reply,no,member);
-		
-		return new ResponseEntity<String>("댓글 등록 완료" ,HttpStatus.OK);
-	}
 	
-	@DeleteMapping("/reply/{replyId}")	
+	@GetMapping("reply/{no}/list")
+	public ResponseEntity<List<Reply>> getReplyByNo(@PathVariable int no) {
+		List<Reply> reply = replyService.getReplyByNo(no);
+		return new ResponseEntity<>(reply, HttpStatus.OK);
+	}
+
+	@PostMapping("/reply/{no}")
+	public ResponseEntity<?> insertReply(@PathVariable int no, @RequestBody Reply reply, HttpSession session) {
+		Member member = (Member) session.getAttribute("principal");
+
+		replyService.insertReply(reply, no, member);
+
+		return new ResponseEntity<String>("댓글 등록 완료", HttpStatus.OK);
+	}
+
+	@DeleteMapping("/reply/{replyId}")
 	public ResponseEntity<?> deleteReply(@PathVariable int replyId) {
-		
+
 		replyService.deleteReply(replyId);
-		
-		return new ResponseEntity<String>("댓글 삭제 완료" ,HttpStatus.OK);
+
+		return new ResponseEntity<String>("댓글 삭제 완료", HttpStatus.OK);
+
 	}
-	
+
 	@PutMapping("/reply")
 	public @ResponseBody ResponseEntity<?> updateReply(@RequestBody Reply reply) {
-		
+
 		replyService.updateReply(reply);
-		
+
 		return new ResponseEntity<String>("댓글 수정 완료", HttpStatus.OK);
 	}
-	
-	}
-	
-	
 
+}

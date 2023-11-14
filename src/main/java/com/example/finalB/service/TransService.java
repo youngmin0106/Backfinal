@@ -71,8 +71,6 @@ public class TransService {
 		return transRepository.findByMemberUsernameAndTrans(username, TransType.DONE);
 	}
 	
-	
-	
 	// 게시글 정보들 postId로 List 가져오기
 	public List<Trans> getTransByPostIds(List<Integer> postIds) {
 	    return transRepository.findAllById(postIds);

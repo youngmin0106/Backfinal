@@ -11,4 +11,5 @@ import com.example.finalB.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, String> {
 
 	Optional<Member> findByUsername(String username);
+	Optional<Member> findByPhone(String phone);
 }
