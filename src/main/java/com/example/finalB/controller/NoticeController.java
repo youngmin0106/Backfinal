@@ -19,71 +19,66 @@ import com.example.finalB.domain.Cs;
 import com.example.finalB.repository.CsRepository;
 import com.example.finalB.service.NoticeService;
 
-
-
 @RestController
 public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
+	
 	@Autowired
 	private CsRepository csRepository;
-	
-	@PostMapping("/notice") //게시물추가
-	public ResponseEntity<?> insertNotice(@RequestBody Cs cs){
-		System.out.println(cs);
+
+	@PostMapping("/notice") // 게시물추가
+	public ResponseEntity<?> insertNotice(@RequestBody Cs cs) {
 		noticeService.insertNotice(cs);
-			
-		return new ResponseEntity<>("공지사항 작성 완료" , HttpStatus.OK);
+
+		return new ResponseEntity<>("공지사항 작성 완료", HttpStatus.OK);
+
 	}
-	
-	@GetMapping("/notice") //게시물리스트
-	public ResponseEntity<?> getNoticeList(){
+
+	@GetMapping("/notice") // 게시물리스트
+	public ResponseEntity<?> getNoticeList() {
 		List<Cs> noticeList = noticeService.getNoticeList();
-		System.out.println(noticeList);
-		return new ResponseEntity<>(noticeList,HttpStatus.OK);
-	}
-	@GetMapping("/notice/{no}") //하나게시물만 보기
-	public ResponseEntity<?> getNotice(@PathVariable Integer no){
-		Cs cs = noticeService.getNotice(no);
 		
-		return new ResponseEntity<>(cs,HttpStatus.OK);
+		return new ResponseEntity<>(noticeList, HttpStatus.OK);
 	}
+
+	@GetMapping("/notice/{no}") // 하나게시물만 보기
+	public ResponseEntity<?> getNotice(@PathVariable Integer no) {
+		Cs cs = noticeService.getNotice(no);
+
+		return new ResponseEntity<>(cs, HttpStatus.OK);
+	}
+
 	@DeleteMapping("/notice")
-	public ResponseEntity<?> deleteNotice(@RequestParam Integer no){
+	public ResponseEntity<?> deleteNotice(@RequestParam Integer no) {
 
 		noticeService.deleteNotice(no);
-		
-		return new ResponseEntity<>(no + "번 게시물 삭제 완료",HttpStatus.OK);
+
+		return new ResponseEntity<>(no + "번 게시물 삭제 완료", HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/notice/{no}/update")
-	public ResponseEntity<?> updateNotice(@RequestBody Cs cs){
-		
+	public ResponseEntity<?> updateNotice(@RequestBody Cs cs) {
+
 		noticeService.updateNotice(cs);
-		
-		return new ResponseEntity<>("수정 완료" , HttpStatus.OK);
+
+		return new ResponseEntity<>("수정 완료", HttpStatus.OK);
 	}
-	
-	
-	
+
 	@PutMapping("/notice/{no}/views")
-    public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
-        Optional<Cs> noticeOptional = csRepository.findById(no);
-        if (noticeOptional.isPresent()) {
-            Cs cs = noticeOptional.get();
-            cs.setCnt(cs.getCnt()+1);
-            csRepository.save(cs);
-            return ResponseEntity.ok("조회수가 증가");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-	
-	
-	
-
-	  
+	public ResponseEntity<String> increaseViews(@PathVariable("no") Integer no) {
+		
+		Optional<Cs> noticeOptional = csRepository.findById(no);
+		
+		if (noticeOptional.isPresent()) {
+			Cs cs = noticeOptional.get();
+			cs.setCnt(cs.getCnt() + 1);
+			csRepository.save(cs);
+			return ResponseEntity.ok("조회수가 증가");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
-
+}

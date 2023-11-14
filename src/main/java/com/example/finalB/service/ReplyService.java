@@ -18,6 +18,7 @@ public class ReplyService {
 
 	@Autowired
 	private ReplyRepository replyRepository;
+	
 	@Autowired
 	private OnetoOneRepositroy onetoOneRepositroy;
 	
@@ -36,16 +37,18 @@ public class ReplyService {
 	}
 
 	public void deleteReply(int replyId) {
-
 		replyRepository.deleteById(replyId);
 	}
 
 	@Transactional
 	public void updateReply(Reply reply) {
-	
+
 		Reply oriReply = (Reply) replyRepository.findById(reply.getId()).get();
 		oriReply.setContent(reply.getContent());
 
 	}
 
 }
+
+
+

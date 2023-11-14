@@ -13,8 +13,4 @@ public interface CsRepository extends JpaRepository<Cs, Integer>{
 	
 	public List<Cs> findAllByOrderByNoDesc();
 
-
-	
-	
-	
 }

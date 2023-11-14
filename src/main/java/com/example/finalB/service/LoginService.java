@@ -29,7 +29,9 @@ public class LoginService {
 	}
 	
 	public Member getMember(String username) {
+		
 		return memberrepository.findByUsername(username).orElseGet(() -> {
+			
 			return new Member();
 		});
 	}

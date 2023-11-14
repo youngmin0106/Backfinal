@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -17,13 +18,9 @@ import lombok.Setter;
 @Setter
 public class UserDetailsImpl implements UserDetails {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private Member member;
-	
 	private Map<String, Object> attributes;
 	
 	public UserDetailsImpl(Member member) {
@@ -41,52 +38,42 @@ public class UserDetailsImpl implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		Collection<GrantedAuthority> roleList = new ArrayList<>();
-		
 		roleList.add(new GrantedAuthority() {
-			
 			@Override
 			public String getAuthority() {
-				
 				return "ROLE_" + member.getRole();
 			}
 		});
-		
 		return roleList;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return member.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		
 		return member.getUsername();
 	}
 
 	@Override 
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

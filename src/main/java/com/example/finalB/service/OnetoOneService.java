@@ -39,6 +39,7 @@ public class OnetoOneService {
 	}
 	//수정
 	public void updateOnetoOne(OneToOne oneToone) {
+		
 		OneToOne oriOneToone = (OneToOne)onetoOneRepositroy.findById(oneToone.getNo()).get();
 		
 		oriOneToone.setTitle(oneToone.getTitle());

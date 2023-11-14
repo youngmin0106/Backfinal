@@ -62,7 +62,7 @@ public class OneToOne {
 	private Member member;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
 	@OrderBy("no desc")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Reply> replyList;

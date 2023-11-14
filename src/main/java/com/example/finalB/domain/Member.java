@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -33,7 +34,7 @@ public class Member {
 	@Column(length = 100)
 	private String password; // 비번
 
-	@Column(length = 100) // null 값 가질 수 없음, 크기=20
+	@Column(length = 100) // 크기=20
 	private String name; // 이름
 
 	@Column(length = 100)
