@@ -2,8 +2,12 @@ package com.example.finalB.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +17,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -45,9 +53,15 @@ public class Trans {
 	private String game; // 게임명
 	
 	@CreationTimestamp
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp createdate; // 게시글 등록 일자
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "memberid") // 외래키 어노테이션 (외래키이름)
 	private Member member; // 작성자
+	
+	@Enumerated(EnumType.STRING)
+	private TransType trans;
+	
+	
 }

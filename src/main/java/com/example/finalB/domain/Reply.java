@@ -2,6 +2,7 @@ package com.example.finalB.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -34,6 +40,7 @@ public class Reply {
 	   private String content;
 	   
 	   @CreationTimestamp
+	   @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	   private Timestamp createDate;
 	   
 	   //하나의 작성자는 하나의 댓글만 작성할수 있나		@OneToOne
@@ -44,7 +51,8 @@ public class Reply {
 	   @JoinColumn(name = "memberid")
 	   private Member member;
 	   
+	   @JsonBackReference
 	   @ManyToOne(fetch = FetchType.EAGER)
-	   @JoinColumn(name = "csno")
-	   private Cs cs;
+	   @JoinColumn(name = "no")
+	   private OneToOne onetoone;
 }
