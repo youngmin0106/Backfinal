@@ -145,7 +145,8 @@ public class MemberService {
 
 	      body.add("grant_type", "authorization_code");
 	      body.add("client_id", "ccc3b6d2fedd138aa407aa4112b315cd"); // 각자 rest api key
-	      body.add("redirect_uri", "http://localhost:3000/oauth/kakao");
+//	      body.add("redirect_uri", "http://localhost:3000/oauth/kakao");
+	      body.add("redirect_uri", "https://testft-f9647.web.app/oauth/kakao");
 	      body.add("code", code);
 
 	      HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, header);

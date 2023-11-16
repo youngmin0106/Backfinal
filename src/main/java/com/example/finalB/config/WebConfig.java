@@ -12,7 +12,8 @@ public class WebConfig implements WebMvcConfigurer  {
 	public void addCorsMappings(CorsRegistry registry) {
 		
 		registry.addMapping("/**")	// 모든 요청을 받았을때
-				.allowedOrigins("http://localhost:3000")	// 3000 포트번호로 들어오는거 허용하셈
+//				.allowedOrigins("http://localhost:3000")	// 3000 포트번호로 들어오는거 허용하셈
+				.allowedOrigins("https://testft-f9647.web.app")
 				.allowedMethods("GET", "POST", "DELETE", "PUT");
 
 
