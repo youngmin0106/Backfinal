@@ -57,7 +57,7 @@ public class Cs {
 	@JoinColumn(name = "memberid")
 	private Member member;
 
-
+//zzz
 }
 
 
