@@ -43,7 +43,7 @@ public class Cs {
 	@Column(nullable = false, length = 100)
 	private String title; // 게시글 제목
 
-
+	@Lob
 	@Column(nullable = false)
 	private String content; // 내용
 
