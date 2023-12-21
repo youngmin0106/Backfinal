@@ -47,7 +47,7 @@ public class OneToOne {
 	private String title; // 게시글 제목
 
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 1000)
 	private String content; // 내용
 
 	@CreationTimestamp
