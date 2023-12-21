@@ -34,34 +34,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Onetoone")
 @SequenceGenerator(
-		name = "ONETOONE_SEQ_GENERATOR", 
-		sequenceName = "Onetoone_SEQ", 
-		initialValue = 1, allocationSize = 1)
+        name = "ONETOONE_SEQ_GENERATOR", 
+        sequenceName = "Onetoone_SEQ", 
+        initialValue = 1, allocationSize = 1)
 @AllArgsConstructor
 public class OneToOne {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "ONETOONE_SEQ_GENERATOR")
-	private Integer no; // 게시글 번호
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "ONETOONE_SEQ_GENERATOR")
+    private Integer no; // 게시글 번호
 
-	@Column(nullable = false, length = 100)
-	private String title; // 게시글 제목
+    @Column(nullable = false, length = 100)
+    private String title; // 게시글 제목
 
+    @Column(nullable = false, length = 1000)
+    private String content; // 내용
 
-	@Column(nullable = false, length = 1000)
-	private String content; // 내용
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private Timestamp createDate; // 작성일자
 
-	@CreationTimestamp
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Timestamp createDate; // 작성일자
-	
-	private int cnt; // 조회수
+    private int cnt; // 조회수
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "memberid")
-	private Member member;
-	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER)
-	@OrderBy("no desc")
-	private List<Reply> replyList;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "memberid")
+    private Member member;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "onetoone", fetch = FetchType.EAGER)
+    @OrderBy("no desc")
+    private List<Reply> replyList;
 }
